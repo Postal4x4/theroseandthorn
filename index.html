@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Rose & Thorn</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:   #1A2E1A;
+      --amber:   #C47A1E;
+      --brass:   #8B6914;
+      --parch:   #E8D9B0;
+      --cream:   #F5EFE0;
+      --ink:     #2A1F0E;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lora', Georgia, serif;
+      background: var(--green);
+      color: var(--parch);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 2.5rem;
+      background: rgba(20, 36, 20, 0.92);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(196, 122, 30, 0.3);
+    }
+    .nav-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.12em;
+      color: var(--amber);
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--parch);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--amber); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      background:
+        radial-gradient(ellipse at 50% 60%, rgba(139,105,20,0.18) 0%, transparent 65%),
+        repeating-linear-gradient(
+          0deg,
+          rgba(0,0,0,0.07) 0px, rgba(0,0,0,0.07) 1px,
+          transparent 1px, transparent 40px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 1px,
+          transparent 1px, transparent 40px
+        ),
+        var(--green);
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(196,122,30,0.08), transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      color: var(--amber);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      font-weight: 900;
+      line-height: 0.95;
+      color: var(--cream);
+      text-shadow: 0 2px 40px rgba(0,0,0,0.6);
+      margin-bottom: 0.2em;
+    }
+    .hero h1 span { color: var(--amber); }
+    .hero-sub {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--parch);
+      opacity: 0.8;
+      margin-top: 1.2rem;
+      max-width: 480px;
+    }
+    .hero-cta {
+      margin-top: 2.8rem;
+      display: flex; gap: 1.2rem; flex-wrap: wrap; justify-content: center;
+    }
+    .btn {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.85rem 2.2rem;
+      border: 1px solid var(--amber);
+      color: var(--ink);
+      background: var(--amber);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn:hover { background: var(--brass); border-color: var(--brass); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--parch);
+    }
+    .btn-ghost:hover { background: rgba(232,217,176,0.1); color: var(--cream); }
+
+    /* ── DIVIDER ── */
+    .divider {
+      display: flex; align-items: center; gap: 1.2rem;
+      max-width: 700px; margin: 0 auto;
+    }
+    .divider-line { flex: 1; height: 1px; background: var(--brass); opacity: 0.4; }
+    .divider-glyph {
+      font-size: 1.2rem;
+      color: var(--amber);
+      line-height: 1;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 2rem; }
+
+    .section-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--amber);
+      text-align: center;
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--cream);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .section-intro {
+      font-style: italic;
+      color: var(--parch);
+      opacity: 0.75;
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto 3.5rem;
+      line-height: 1.8;
+    }
+
+    /* ── FOOD ── */
+    #food { background: #111d11; }
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .food-card {
+      border: 1px solid rgba(139,105,20,0.3);
+      padding: 2rem 1.8rem;
+      position: relative;
+      transition: border-color 0.25s;
+    }
+    .food-card:hover { border-color: var(--amber); }
+    .food-card-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .food-card h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.05rem;
+      color: var(--amber);
+      margin-bottom: 0.6rem;
+    }
+    .food-card p {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--parch);
+      opacity: 0.8;
+    }
+    .food-card .price {
+      display: block;
+      margin-top: 1rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      color: var(--brass);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── EVENTS ── */
+    #events { background: var(--green); }
+    .events-list {
+      max-width: 780px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .event-item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 1.5rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid rgba(139,105,20,0.2);
+      align-items: start;
+    }
+    .event-item:last-child { border-bottom: none; }
+    .event-date {
+      text-align: center;
+      border: 1px solid rgba(196,122,30,0.4);
+      padding: 0.6rem 0.4rem;
+    }
+    .event-date .day {
+      display: block;
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--amber);
+      line-height: 1;
+    }
+    .event-date .month {
+      display: block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--parch);
+      opacity: 0.6;
+      margin-top: 0.3rem;
+    }
+    .event-info h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.05rem;
+      color: var(--cream);
+      margin-bottom: 0.4rem;
+    }
+    .event-info p {
+      font-size: 0.9rem;
+      color: var(--parch);
+      opacity: 0.7;
+      line-height: 1.7;
+    }
+    .event-tag {
+      display: inline-block;
+      margin-top: 0.6rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--amber);
+      border: 1px solid rgba(196,122,30,0.4);
+      padding: 0.2rem 0.6rem;
+    }
+
+    /* ── DRINKS ── */
+    #drinks { background: #111d11; }
+    .drinks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1px;
+      max-width: 1100px;
+      margin: 0 auto;
+      border: 1px solid rgba(139,105,20,0.25);
+    }
+    .drink-item {
+      padding: 2rem 1.6rem;
+      border: 1px solid rgba(139,105,20,0.15);
+    }
+    .drink-item h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      color: var(--amber);
+      margin-bottom: 0.4rem;
+    }
+    .drink-item p {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--parch);
+      opacity: 0.65;
+      line-height: 1.6;
+    }
+    .drink-item .abv {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--brass);
+      margin-top: 0.7rem;
+    }
+
+    /* ── HOURS / FIND US ── */
+    #visit {
+      background: var(--green);
+      text-align: center;
+    }
+    .visit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 3rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .visit-block h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 1.2rem;
+    }
+    .hours-list { list-style: none; }
+    .hours-list li {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: var(--parch);
+      opacity: 0.8;
+      padding: 0.35rem 0;
+      border-bottom: 1px solid rgba(139,105,20,0.15);
+    }
+    .hours-list li:last-child { border-bottom: none; }
+    .hours-list span { color: var(--cream); font-weight: 600; }
+    .address {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: var(--parch);
+      opacity: 0.8;
+    }
+    .address strong { color: var(--cream); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0d1a0d;
+      text-align: center;
+      padding: 2.5rem 2rem;
+      border-top: 1px solid rgba(139,105,20,0.2);
+    }
+    footer p {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--parch);
+      opacity: 0.35;
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 0.65rem; }
+      section { padding: 4rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">The Rose &amp; Thorn</span>
+    <ul class="nav-links">
+      <li><a href="#food">Kitchen</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#drinks">Cellar</a></li>
+      <li><a href="#visit">Visit</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <p class="hero-eyebrow">Est. Since the First Good Rain</p>
+    <h1>The Rose<br/><span>&amp;</span> Thorn</h1>
+    <p class="hero-sub">A proper pub for those who take their pint — and their supper — seriously.</p>
+    <div class="hero-cta">
+      <a href="#events" class="btn">What's On Tonight</a>
+      <a href="#food" class="btn btn-ghost">View the Kitchen</a>
+    </div>
+  </header>
+
+  <!-- FOOD -->
+  <section id="food">
+    <p class="section-label">The Kitchen</p>
+    <h2 class="section-title">Food Worth Staying For</h2>
+    <p class="section-intro">Everything made from scratch. Sourced locally where we can. Served hot, always.</p>
+
+    <div class="food-grid">
+      <div class="food-card">
+        <div class="food-card-icon">🥧</div>
+        <h3>Steak & Guinness Pie</h3>
+        <p>Braised short rib, roasted mushrooms, and a dark stout reduction in a hand-crimped shortcrust. Served with colcannon and a ladle of gravy.</p>
+        <span class="price">£ · Market Price</span>
+      </div>
+      <div class="food-card">
+        <div class="food-card-icon">🐟</div>
+        <h3>Beer-Battered Cod</h3>
+        <p>North Atlantic cod in a pale ale batter, fried to a proper crunch. Served with hand-cut chips, mushy peas, and house-made tartar.</p>
+        <span class="price">££</span>
+      </div>
+      <div class="food-card">
+        <div class="food-card-icon">🍖</div>
+        <h3>Sunday Roast</h3>
+        <p>Slow-roasted sirloin, Yorkshire pudding, honey-glazed parsnips, roasted carrots, and a bone marrow pan jus. Sundays only — don't be late.</p>
+        <span class="price">£££ · Sundays Only</span>
+      </div>
+      <div class="food-card">
+        <div class="food-card-icon">🫙</div>
+        <h3>Ploughman's Board</h3>
+        <p>Aged farmhouse cheddar, smoked ham hock, pickled walnuts, Branston, crusty sourdough. Simple. Right.</p>
+        <span class="price">£</span>
+      </div>
+      <div class="food-card">
+        <div class="food-card-icon">🥣</div>
+        <h3>Smoked Colcannon Soup</h3>
+        <p>Creamy potato and kale with smoked bacon lardons and a drizzle of brown butter. A bowl of Ireland in every spoon.</p>
+        <span class="price">£</span>
+      </div>
+      <div class="food-card">
+        <div class="food-card-icon">🍮</div>
+        <h3>Sticky Toffee Pudding</h3>
+        <p>Medjool date sponge, house butterscotch, Chantilly cream. The only way to end a meal here.</p>
+        <span class="price">£</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section id="events">
+    <div class="divider" style="margin-bottom: 4rem;">
+      <div class="divider-line"></div>
+      <div class="divider-glyph">☘</div>
+      <div class="divider-line"></div>
+    </div>
+
+    <p class="section-label">What's On</p>
+    <h2 class="section-title">Events & Entertainment</h2>
+    <p class="section-intro">We keep the calendar full. Show up on a quiet night and you might still find something worth staying for.</p>
+
+    <div class="events-list">
+      <div class="event-item">
+        <div class="event-date">
+          <span class="day">04</span>
+          <span class="month">Jul</span>
+        </div>
+        <div class="event-info">
+          <h3>Live Traditional Session</h3>
+          <p>Local musicians take the corner booth. Fiddles, bodhrán, and a fair bit of whistle. No cover charge — just pull up a stool.</p>
+          <span class="event-tag">Music · 8 PM</span>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-date">
+          <span class="day">08</span>
+          <span class="month">Jul</span>
+        </div>
+        <div class="event-info">
+          <h3>Whiskey Tasting Night</h3>
+          <p>Six drams, three distilleries, one evening. Our host will walk you through the pour. Seats limited — ask at the bar to reserve.</p>
+          <span class="event-tag">Spirits · 7 PM</span>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-date">
+          <span class="day">11</span>
+          <span class="month">Jul</span>
+        </div>
+        <div class="event-info">
+          <h3>Pub Quiz — The Proper Kind</h3>
+          <p>Ten rounds. No phones. Teams of six max. The prize is bragging rights and a round on the house — which is plenty.</p>
+          <span class="event-tag">Quiz · 7:30 PM</span>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-date">
+          <span class="day">19</span>
+          <span class="month">Jul</span>
+        </div>
+        <div class="event-info">
+          <h3>Chef's Table: A Night in Cork</h3>
+          <p>Six courses, one long table, strangers becoming friends over Irish produce and wine. Tickets sold at the bar. Twenty seats only.</p>
+          <span class="event-tag">Dining · 6 PM</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DRINKS -->
+  <section id="drinks">
+    <div class="divider" style="margin-bottom: 4rem;">
+      <div class="divider-line"></div>
+      <div class="divider-glyph">🌹</div>
+      <div class="divider-line"></div>
+    </div>
+
+    <p class="section-label">The Cellar</p>
+    <h2 class="section-title">What We Pour</h2>
+    <p class="section-intro">We take the list seriously. If you're unsure, ask. That's what we're here for.</p>
+
+    <div class="drinks-grid">
+      <div class="drink-item">
+        <h3>Guinness Draught</h3>
+        <p>Poured properly. A two-minute wait is non-negotiable.</p>
+        <div class="abv">ABV 4.2% · Nitro</div>
+      </div>
+      <div class="drink-item">
+        <h3>Smithwick's Irish Ale</h3>
+        <p>The overlooked gem. Copper, malt-forward, quietly satisfying.</p>
+        <div class="abv">ABV 3.8% · Draught</div>
+      </div>
+      <div class="drink-item">
+        <h3>Jameson Caskmates</h3>
+        <p>Finished in craft stout barrels. Chocolate, roasted grain, easy warmth.</p>
+        <div class="abv">ABV 40% · Irish Whiskey</div>
+      </div>
+      <div class="drink-item">
+        <h3>Redbreast 12</h3>
+        <p>Single pot still. Orchard fruits and spiced oak. Sipped, never shot.</p>
+        <div class="abv">ABV 40% · Irish Whiskey</div>
+      </div>
+      <div class="drink-item">
+        <h3>London Pride</h3>
+        <p>Fuller's classic. Malty, balanced, a reliable Friday pint.</p>
+        <div class="abv">ABV 4.1% · Cask</div>
+      </div>
+      <div class="drink-item">
+        <h3>House Shandy</h3>
+        <p>Half lager, half house-made lemonade with a sprig of fresh mint.</p>
+        <div class="abv">Non-Alcoholic Available</div>
+      </div>
+      <div class="drink-item">
+        <h3>Bramble</h3>
+        <p>Gin, lemon, crème de mûre, crushed ice. A proper cocktail, properly made.</p>
+        <div class="abv">ABV ~15% · Cocktail</div>
+      </div>
+      <div class="drink-item">
+        <h3>Dark &amp; Stormy</h3>
+        <p>Gosling's Black Seal, house ginger beer, lime. The storm in a glass.</p>
+        <div class="abv">ABV ~13% · Cocktail</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIT -->
+  <section id="visit">
+    <div class="divider" style="margin-bottom: 4rem;">
+      <div class="divider-line"></div>
+      <div class="divider-glyph">☘</div>
+      <div class="divider-line"></div>
+    </div>
+
+    <p class="section-label">Find Us</p>
+    <h2 class="section-title">Come In Out of the Rain</h2>
+    <p class="section-intro">We're easy to find and hard to leave. No reservations needed — except for the Chef's Table and private events.</p>
+
+    <div class="visit-grid">
+      <div class="visit-block">
+        <h3>Opening Hours</h3>
+        <ul class="hours-list">
+          <li>Monday – Wednesday <span>4 PM – 12 AM</span></li>
+          <li>Thursday <span>3 PM – 1 AM</span></li>
+          <li>Friday <span>12 PM – 2 AM</span></li>
+          <li>Saturday <span>11 AM – 2 AM</span></li>
+          <li>Sunday <span>11 AM – 11 PM</span></li>
+        </ul>
+      </div>
+      <div class="visit-block">
+        <h3>Where to Find Us</h3>
+        <p class="address">
+          <strong>The Rose &amp; Thorn</strong><br/>
+          123 Thornfield Lane<br/>
+          Your Town, ST 00000<br/><br/>
+          📞 (555) 867-5309<br/>
+          ✉ hello@theroseandthorn.com
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 The Rose &amp; Thorn &mdash; All Rights Reserved &mdash; Drink Responsibly</p>
+  </footer>
+
+</body>
+</html>
