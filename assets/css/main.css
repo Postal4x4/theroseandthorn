@@ -82,8 +82,23 @@ nav {
   text-transform: uppercase;
   opacity: 0.7;
   transition: 0.2s;
+  position: relative;
 }
 
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 1px;
+  background: var(--amber);
+  transition: 0.25s;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
 .nav-links a:hover,
 .nav-links a.active {
   opacity: 1;
