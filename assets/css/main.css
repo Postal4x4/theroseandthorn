@@ -177,12 +177,14 @@ nav {
   font-family: "Playfair Display", serif;
   font-size: 36px;
   margin-bottom: 12px;
+  letter-spacing: -0.02em;
 }
 
 .section-sub {
   color: var(--text-dim);
   margin-bottom: 40px;
   max-width: 600px;
+  line-height: 1.75;
 }
 
 /* ================================
