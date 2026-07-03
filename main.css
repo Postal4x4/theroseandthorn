@@ -1,0 +1,240 @@
+/* ================================
+   THE ROSE & THORN — MAIN CSS
+   Luxury Estate Design System
+================================== */
+
+:root {
+  --ink: #0b0a08;
+  --deep: #120f0b;
+  --panel: #17130e;
+
+  --cream: #f3ead7;
+  --parchment: #e8dcc0;
+
+  --amber: #c8922a;
+  --amber-light: #e8b84a;
+  --amber-dim: #7a5618;
+
+  --copper: #b07030;
+
+  --text-dim: #9a8b6b;
+  --border: rgba(200,146,42,0.18);
+  --border-soft: rgba(200,146,42,0.08);
+
+  --shadow: 0 20px 60px rgba(0,0,0,0.45);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  background: radial-gradient(circle at top, #1a140f 0%, var(--ink) 60%);
+  color: var(--cream);
+  line-height: 1.6;
+}
+
+/* ================================
+   NAVIGATION
+================================== */
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  background: rgba(10,8,6,0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-soft);
+  padding: 16px 32px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-family: "Playfair Display", serif;
+  color: var(--amber);
+  text-decoration: none;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 22px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--cream);
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  transition: 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  opacity: 1;
+  color: var(--amber-light);
+}
+
+/* ================================
+   HERO
+================================== */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  padding: 120px 24px 80px;
+  background:
+    radial-gradient(circle at 50% 30%, rgba(200,146,42,0.12), transparent 60%),
+    url("https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=2000&q=80");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-title {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(48px, 8vw, 96px);
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--amber-light);
+}
+
+.hero-sub {
+  font-size: 16px;
+  color: var(--text-dim);
+  max-width: 640px;
+  margin-bottom: 40px;
+}
+
+/* ================================
+   BUTTONS
+================================== */
+
+.btn {
+  display: inline-block;
+  padding: 12px 22px;
+  border: 1px solid var(--border);
+  color: var(--cream);
+  text-decoration: none;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 11px;
+  transition: 0.25s;
+  background: rgba(200,146,42,0.05);
+}
+
+.btn:hover {
+  border-color: var(--amber);
+  transform: translateY(-2px);
+}
+
+/* ================================
+   SECTION LAYOUT
+================================== */
+
+.section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 24px;
+}
+
+.section-title {
+  font-family: "Playfair Display", serif;
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+
+.section-sub {
+  color: var(--text-dim);
+  margin-bottom: 40px;
+  max-width: 600px;
+}
+
+/* ================================
+   CARDS (ESTATE ENTRIES)
+================================== */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(0,0,0,0.2));
+  border: 1px solid var(--border-soft);
+  padding: 24px;
+  transition: 0.3s;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border);
+  box-shadow: var(--shadow);
+}
+
+.card h3 {
+  font-family: "Playfair Display", serif;
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+/* ================================
+   FOOTER
+================================== */
+
+footer {
+  text-align: center;
+  padding: 60px 20px;
+  border-top: 1px solid var(--border-soft);
+  color: var(--text-dim);
+}
+
+footer .brand {
+  font-family: "Playfair Display", serif;
+  color: var(--amber);
+  font-size: 18px;
+  display: block;
+  margin-bottom: 10px;
+}
