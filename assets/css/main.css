@@ -160,8 +160,9 @@ nav {
 }
 
 .btn:hover {
-  border-color: var(--amber);
+  border-color: var(--amber-light);
   transform: translateY(-2px);
+  background: rgba(200,146,42,0.12);
 }
 
 /* ================================
