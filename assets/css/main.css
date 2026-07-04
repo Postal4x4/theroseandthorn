@@ -71,7 +71,7 @@ nav{
   text-align:center;
   padding:0 2rem;
   position:relative;
-  background:url("assets/images/hero.jpg");
+background: url("../images/hero.jpg");
   background-size:cover;
   background-position:center;
 }
