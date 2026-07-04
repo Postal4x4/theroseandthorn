@@ -92,6 +92,7 @@ nav{
   font-family:"Playfair Display",serif;
   font-size:clamp(60px,8vw,110px);
   color:var(--parchment);
+  text-shadow: 0 0 30px rgba(200,146,42,.25);
 }
 
 .hero p{
