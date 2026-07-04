@@ -62,20 +62,20 @@ nav{
 }
 
 /* HERO */
-.hero{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:0 2rem;
-  position:relative;
-background: url("../images/rose-thorn-pub-bg.jpg");
-  background-size:cover;
-  background-position:center;
-}
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 2rem;
+  position: relative;
 
+  background: url("../images/rose-thorn-pub-bg.jpg");
+  background-size: cover;
+  background-position: center;
+}
 .hero::before{
   content:"";
   position:absolute;
