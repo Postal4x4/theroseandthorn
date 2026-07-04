@@ -14,11 +14,11 @@
 
 *{margin:0;padding:0;box-sizing:border-box;}
 
-body{
-  font-family:"Lato",sans-serif;
-  background: radial-gradient(circle at top,#1a140f 0%,#0b0a08 70%);
-  color:var(--cream);
-  overflow-x:hidden;
+body {
+  font-family: "Lato", sans-serif;
+  background: radial-gradient(circle at top, #1a140f 0%, #0b0a08 70%);
+  color: var(--cream);
+  overflow-x: hidden;
 }
 
 /* NAV */
