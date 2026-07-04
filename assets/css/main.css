@@ -168,3 +168,29 @@ footer{
 
   text-shadow: 0 0 30px rgba(200,146,42,.25);
 }
+/* =========================
+   LAYOUT SAFETY RESTORE
+========================= */
+
+.section {
+  position: relative;
+  z-index: 2;
+}
+
+.hero {
+  z-index: 1;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.card {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+}
