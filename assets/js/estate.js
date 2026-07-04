@@ -17,6 +17,14 @@ window.Estate = {
       detail: this
     }));
 
+    this.updateBodyState();
     console.log("Estate State:", this);
+  },
+
+  updateBodyState() {
+    document.body.setAttribute(
+      "data-resident",
+      this.activeResident || "none"
+    );
   }
 };
