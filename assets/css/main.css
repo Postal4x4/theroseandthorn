@@ -166,10 +166,6 @@ footer{
   box-shadow: 0 18px 45px rgba(0,0,0,.55);
 }
 
-/* subtle “estate is alive” glow */
-
-  text-shadow: 0 0 30px rgba(200,146,42,.25);
-}
 /* =========================
    LAYOUT SAFETY RESTORE
 ========================= */
@@ -181,5 +177,112 @@ footer{
 
 .hero {
   z-index: 1;
+}
+
+/* =========================
+   HOUSEHOLD PAGE ADDITIONS
+========================= */
+
+/* stat strip (hero-level numbers) */
+.stat-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+  max-width:760px;
+  margin:30px auto 0;
+}
+.stat-card{
+  background:rgba(10,8,6,.9);
+  padding:18px 16px;
+  text-align:center;
+}
+.stat-card h3{
+  font-size:28px;
+  color:var(--amber);
+  margin-bottom:4px;
+}
+.stat-card p{
+  font-size:10px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--text-dim);
+}
+
+/* persona cards */
+.persona-card{
+  border-top:2px solid var(--accent, var(--amber));
+  cursor:pointer;
+  transition:transform .2s, box-shadow .2s, border-color .2s;
+}
+.persona-card .persona-icon{
+  font-size:26px;
+  display:block;
+  margin-bottom:8px;
+}
+.persona-card .wake-word{
+  font-size:10px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--accent, var(--amber));
+  opacity:.8;
+  margin-bottom:10px;
+}
+.persona-card .tag-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:14px;
+}
+.tag{
+  font-size:9px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  padding:4px 9px;
+  border:1px solid var(--border);
+  color:var(--text-dim);
+  background:rgba(200,146,42,.06);
+}
+
+/* capability cards */
+.cap-card ul{
+  list-style:none;
+  margin-top:10px;
+}
+.cap-card li{
+  font-size:12.5px;
+  color:var(--text-dim);
+  padding:5px 0;
+  border-bottom:1px solid rgba(200,146,42,.08);
+  line-height:1.5;
+}
+.cap-card li:last-child{ border-bottom:none; }
+.cap-card li strong{ color:var(--cream); }
+
+/* privacy strip */
+.privacy-strip{
+  border:1px solid var(--border);
+  background:rgba(10,8,6,.9);
+  padding:30px;
+  max-width:900px;
+  margin:0 auto;
+  text-align:center;
+}
+.privacy-strip h3{
+  font-family:"Playfair Display",serif;
+  color:var(--amber-light);
+  margin-bottom:10px;
+}
+.privacy-points{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:24px;
+  margin-top:18px;
+}
+.privacy-points span{
+  font-size:12px;
+  color:var(--text-dim);
 }
 
