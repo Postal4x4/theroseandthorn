@@ -50,8 +50,13 @@ nav {
   top: 0;
   width: 100%;
   z-index: 100;
-  background: rgba(10,8,6,0.85);
+  background:
+    linear-gradient(
+        rgba(15,11,8,.96),
+        rgba(8,6,5,.92)
+    );
   backdrop-filter: blur(10px);
+  box-shadow: 0 8px 30px rgba(0,0,0,.45);
   border-bottom: 1px solid var(--border-soft);
   padding: 16px 32px;
 
@@ -110,42 +115,46 @@ nav {
 ================================== */
 
 .hero {
+    position: relative;
     min-height: 100vh;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     text-align: center;
     padding: 0 2rem;
-
-    background:
-        linear-gradient(
-            rgba(8, 8, 8, 0.72),
-            rgba(8, 8, 8, 0.72)
-        ),
-        url("../images/rose-thorn-pub-bg.jpg");
-
+    background: url("../images/rose-thorn-pub-bg.jpg");
     background-size: cover;
-    background-position: center center;
+    background-position: center;
     background-repeat: no-repeat;
+    overflow: hidden;
 }
 
-.hero::after {
-  background:
-    radial-gradient(circle at 50% 20%, rgba(200,146,42,0.10), transparent 55%),
-    rgba(0,0,0,0.65);
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at center,
+            rgba(0,0,0,.15) 0%,
+            rgba(0,0,0,.45) 45%,
+            rgba(0,0,0,.82) 100%),
+        linear-gradient(rgba(18,12,7,.35), rgba(10,8,6,.72));
+    z-index: 0;
 }
+
 .hero > * {
   position: relative;
   z-index: 1;
 }
 
 .hero-title {
-    text-shadow:
-        0 3px 8px rgba(0,0,0,.75),
-        0 0 40px rgba(0,0,0,.45);
+    font-family:"Playfair Display", serif;
+    font-size:clamp(58px,8vw,110px);
+    font-weight:400;
+    color:var(--parchment);
+    margin-bottom:18px;
+    text-shadow:0 4px 12px rgba(0,0,0,.75),0 0 60px rgba(0,0,0,.5);
 }
 
 .hero-title em {
@@ -162,16 +171,17 @@ nav {
 ================================== */
 
 .btn {
-  display: inline-block;
-  padding: 12px 22px;
-  border: 1px solid var(--border);
-  color: var(--cream);
-  text-decoration: none;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-size: 11px;
-  transition: 0.25s;
-  background: rgba(200,146,42,0.05);
+  display:inline-block;
+  padding:15px 34px;
+  border:1px solid rgba(200,146,42,.65);
+  color:var(--cream);
+  text-decoration:none;
+  background:linear-gradient(rgba(48,34,18,.65), rgba(22,16,11,.75));
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  font-size:12px;
+  transition:.3s;
+  box-shadow:0 8px 18px rgba(0,0,0,.35);
 }
 
 .btn:hover {
@@ -185,7 +195,7 @@ nav {
 ================================== */
 
 .section {
-  max-width: 1100px;
+  max-width: 1320px;
   margin: 0 auto;
   padding: 80px 24px;
 }
@@ -215,10 +225,12 @@ nav {
 }
 
 .card {
-  background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(0,0,0,0.2));
-  border: 1px solid var(--border-soft);
-  padding: 24px;
-  transition: 0.3s;
+  background: linear-gradient(rgba(18,13,10,.88), rgba(10,8,6,.94));
+  border: 1px solid rgba(200,146,42,.18);
+  border-radius: 4px;
+  padding: 28px;
+  box-shadow: 0 15px 35px rgba(0,0,0,.45);
+  transition: .35s;
   position: relative;
 }
 
