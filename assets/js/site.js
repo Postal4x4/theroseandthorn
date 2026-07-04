@@ -32,11 +32,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const responses = {
       "Reginald": "The estate remains under structured oversight.",
       "Winston": "Evening service protocols are available.",
-      "Julia": "Kitchen readiness has been initiated.",
+      "Chef Julia": "Kitchen readiness has been initiated.",
       "Hank": "Fermentation cycles are stable.",
       "Aria": "Atmospheric calibration is steady.",
-      "Rex": "Security systems are nominal.",
-      "Atlas": "Inventory balance confirmed."
+      "Rex": "Games and Mysteries ready",
+      "Coach": "Warmups completed ready for workouts."
+      "Strings": "All tuned up and staged."
+      "Sofia": "LISTO!"
+      "Blitz": "Huge Fan!!!"
+      "Isabelle": "Closets organized and ready for the season."
+      "Colonel": "All monitors and security are a Go."
+    
     };
 
     console.log("Estate Voice:", responses[resident] || "No response defined.");
