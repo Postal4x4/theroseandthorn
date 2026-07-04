@@ -25,36 +25,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // GLOBAL RESPONSE SYSTEM
-  window.addEventListener("estate:update", (e) => {
-    const state = e.detail;
+  // SAFE RESPONSE SYSTEM (NO CSS SIDE EFFECTS)
+  Estate.onChange((resident) => {
+    if (!resident) return;
 
-    handleResidentResponse(state.activeResident);
+    const responses = {
+      "Reginald": "The estate remains under structured oversight.",
+      "Winston": "Evening service protocols are available.",
+      "Julia": "Kitchen readiness has been initiated.",
+      "Hank": "Fermentation cycles are stable.",
+      "Aria": "Atmospheric calibration is steady.",
+      "Rex": "Security systems are nominal.",
+      "Atlas": "Inventory balance confirmed."
+    };
+
+    console.log("Estate Voice:", responses[resident] || "No response defined.");
   });
 
 });
-
-function handleResidentResponse(resident) {
-  if (!resident) return;
-
-  const responses = {
-    "Reginald": "The estate is under structured supervision.",
-    "Winston": "Evening protocols are now available.",
-    "Julia": "Kitchen systems are on standby for preparation.",
-    "Hank": "Fermentation cycles are within optimal range.",
-    "Aria": "Atmospheric layers adjusted subtly.",
-    "Rex": "Interactive systems are ready for engagement.",
-    "Orion": "Security layer is stable and monitoring.",
-    "Atlas": "Inventory systems are balanced.",
-    "Selene": "Environmental controls are steady.",
-    "Mercer": "Memory logs are being maintained.",
-    "Nova": "Guest protocols are active.",
-    "Sol": "Scheduling systems are synchronized.",
-    "Barley": "Brewing analytics are processing live data.",
-    "Echo": "Entertainment systems are available.",
-    "Cedar": "Household metrics are being analyzed.",
-    "Vanta": "System integrity is confirmed."
-  };
-
-  console.log(`🜁 ${resident}:`, responses[resident] || "No response defined.");
-}
