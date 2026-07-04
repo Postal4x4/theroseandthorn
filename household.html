@@ -4,225 +4,354 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Household — On-Premises AI System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0a0805;
+  --deep:#110d07;
+  --panel:#1a1208;
+  --cream:#f2ead8;
+  --amber:#c8922a;
+  --amber-light:#e8b84a;
+  --amber-dim:#7a5618;
+  --copper:#b07030;
+  --smoke:#4a3828;
+  --oak:#6a4820;
+  --hickory:#3a2810;
+  --ember:#8a3010;
+  --border:rgba(200,146,42,0.2);
+  --border-dim:rgba(200,146,42,0.08);
+  --text-dim:#8a7050;
+  --text-muted:#6a5530;
+}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--cream);font-family:'Lato',sans-serif;font-size:15px;line-height:1.7}
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,4,2,0.96);backdrop-filter:blur(8px);border-bottom:0.5px solid var(--border);padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{font-family:'Playfair Display',serif;font-size:18px;font-style:italic;color:var(--amber);text-decoration:none}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--cream);text-decoration:none;opacity:0.65;transition:opacity 0.2s}
+.nav-links a:hover,.nav-links a.active{opacity:1;color:var(--amber)}
 
-<link rel="stylesheet" href="assets/css/main.css"> 
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px 60px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 100%,rgba(200,146,42,0.18) 0%,transparent 65%),radial-gradient(ellipse 60% 40% at 50% 0%,rgba(200,146,42,0.06) 0%,transparent 60%);pointer-events:none}
+.hero-rule{width:48px;height:0.5px;background:var(--amber);margin:0 auto 24px;opacity:0.5}
+.hero-eyebrow{font-size:10px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:var(--amber);margin-bottom:18px;opacity:0.8}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(52px,11vw,108px);font-weight:400;line-height:0.92;color:var(--cream);margin-bottom:10px}
+.hero-title em{font-style:italic;color:var(--amber-light)}
+.hero-sub{font-family:'Playfair Display',serif;font-size:clamp(15px,2.2vw,20px);font-style:italic;color:var(--text-dim);margin-bottom:44px;max-width:600px;line-height:1.55}
+.hero-stats{display:flex;flex-wrap:wrap;justify-content:center;max-width:760px;margin:0 auto 40px;border:0.5px solid var(--border)}
+.stat{flex:1;min-width:110px;padding:20px 22px;border-right:0.5px solid var(--border);text-align:center}
+.stat:last-child{border-right:none}
+.stat-num{font-family:'Playfair Display',serif;font-size:32px;font-weight:600;color:var(--amber);display:block;line-height:1;margin-bottom:4px}
+.stat-label{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-dim)}
+.scroll-cue{font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-dim);opacity:0.5}
+
+/* DIVIDERS */
+.divider{display:flex;align-items:center;gap:18px;padding:0 40px;margin:8px 0}
+.div-line{flex:1;height:0.5px;background:var(--border)}
+.div-mark{font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber-dim);opacity:0.85;white-space:nowrap}
+
+/* SECTIONS */
+.section{max-width:1200px;margin:0 auto;padding:72px 32px}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--amber);margin-bottom:10px;opacity:0.75}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,46px);font-weight:400;color:var(--cream);margin-bottom:8px;line-height:1.1}
+.sec-sub{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;color:var(--text-dim);margin-bottom:44px;max-width:640px}
+
+/* PERSONA CARDS (same visual pattern as BrewHause craft cards) */
+.persona-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:var(--border-dim);border:0.5px solid var(--border)}
+.persona{background:var(--deep);padding:28px 24px;position:relative;transition:background 0.2s}
+.persona:hover{background:#160e05}
+.persona:hover .persona-icon{transform:scale(1.12)}
+.persona::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--cc,var(--amber));opacity:0.55}
+.persona-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px}
+.persona-icon{font-size:30px;line-height:1;flex-shrink:0;margin-top:2px;transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1)}
+.persona-info{flex:1}
+.persona-name{font-family:'Playfair Display',serif;font-size:22px;color:var(--cream);line-height:1.1;margin-bottom:4px}
+.persona-wake{font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--cc,var(--amber));opacity:0.75}
+.persona-role{font-size:12.5px;color:var(--text-dim);line-height:1.65;margin-bottom:14px}
+.persona-tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 9px;border:0.5px solid var(--border);color:var(--text-dim);background:rgba(200,146,42,0.05)}
+
+/* HIGHLIGHT STRIP */
+.highlight-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--border-dim);border:0.5px solid var(--border);margin-bottom:48px}
+.highlight-item{background:var(--deep);padding:22px 20px;text-align:center}
+.highlight-val{font-family:'Playfair Display',serif;font-size:30px;font-weight:600;color:var(--amber);display:block;line-height:1;margin-bottom:6px}
+.highlight-label{font-size:10.5px;color:var(--text-dim);letter-spacing:0.08em;text-transform:uppercase}
+
+/* CAPABILITY CARDS */
+.cap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px}
+.cap-card{background:var(--deep);border:0.5px solid var(--border-dim);padding:26px 24px;transition:border-color 0.2s;position:relative}
+.cap-card:hover{border-color:var(--border)}
+.cap-icon-row{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.cap-icon{font-size:24px}
+.cap-title{font-family:'Playfair Display',serif;font-size:19px;color:var(--cream)}
+.cap-items{list-style:none}
+.cap-items li{font-size:12.5px;color:var(--text-dim);padding:6px 0;border-bottom:0.5px solid var(--border-dim);display:flex;align-items:baseline;gap:8px;line-height:1.5}
+.cap-items li:last-child{border-bottom:none}
+.cap-items li::before{content:'—';color:var(--amber-dim);flex-shrink:0;font-size:11px}
+.cap-items li strong{color:var(--cream);font-weight:700}
+
+/* TECH STACK STRIP */
+.stack-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1px;background:var(--border-dim);border:0.5px solid var(--border)}
+.stack-item{background:var(--deep);padding:16px 18px;display:flex;align-items:center;gap:10px}
+.stack-dot{width:6px;height:6px;border-radius:50%;background:var(--amber);flex-shrink:0;opacity:0.7}
+.stack-name{font-size:12.5px;font-weight:700;color:var(--cream)}
+.stack-role{font-size:11px;color:var(--text-dim)}
+
+/* SENSOR / PRIVACY STRIP */
+.sensor-strip{background:#0d0905;border:0.5px solid var(--border);padding:32px 36px;max-width:900px;margin:0 auto}
+.sensor-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1px;background:var(--border-dim);border:0.5px solid var(--border-dim);margin-top:20px}
+.sensor{background:var(--deep);padding:16px 18px;display:flex;align-items:flex-start;gap:10px}
+.sensor-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.sn{font-size:12px;color:var(--cream);margin-bottom:2px}
+.sd{font-size:11px;color:var(--text-dim);line-height:1.4}
+
+/* QUOTE */
+.quote{max-width:660px;margin:56px auto;text-align:center;padding:0 32px}
+.qt{font-family:'Playfair Display',serif;font-size:clamp(18px,2.8vw,28px);font-style:italic;color:var(--cream);line-height:1.4;margin-bottom:14px;opacity:0.88}
+.qa{font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--amber);opacity:0.65}
+
+/* FOOTER */
+footer{border-top:0.5px solid var(--border-dim);padding:36px 32px;text-align:center}
+.fl{font-family:'Playfair Display',serif;font-size:20px;font-style:italic;color:var(--amber);display:block;margin-bottom:6px}
+.fs{font-size:11px;color:var(--text-dim);margin-bottom:18px}
+.flinks{display:flex;justify-content:center;gap:22px;flex-wrap:wrap}
+.flinks a{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-dim);text-decoration:none;transition:color 0.2s}
+.flinks a:hover{color:var(--amber)}
+.fmeta{font-size:10px;color:var(--text-muted);margin-top:18px;opacity:0.5}
+
+@media(max-width:600px){nav{padding:0 16px}.nav-links{display:none}.section{padding:56px 18px}.sensor-strip{padding:22px 16px}}
+</style>
 </head>
-  
 <body>
-  
-<nav>
-  <a class="nav-logo" href="index.html">The Rose & Thorn</a>
 
+<nav>
+  <a href="https://theroseandthorn.com" class="nav-logo">The Rose &amp; Thorn</a>
   <ul class="nav-links">
-    <li><a href="index.html">Estate</a></li>
-    <li><a href="brewhause.html">BrewHause</a></li>
-    <li><a href="household.html" class="active">Household</a></li>
-    <li><a href="architecture.html">Architecture</a></li>
+    <li><a href="https://theroseandthorn.com/#food">Kitchen</a></li>
+    <li><a href="https://theroseandthorn.com/#events">Events</a></li>
+    <li><a href="https://theroseandthorn.com/#drinks">Cellar</a></li>
+    <li><a href="/brewhause">The BrewHause</a></li>
+    <li><a href="/household" class="active">The Household AI</a></li>
+    <li><a href="https://theroseandthorn.com/#visit">Visit</a></li>
   </ul>
 </nav>
-<!-- DIVIDER -->
-<header class="hero">
-  <h1>The Household</h1>
-  <p>
-    Meet the staff<br>
-    A fully private, on-premises AI estate — 16 personas
-  </p>
-</header>
-<!-- PERSONA SECTION -->
-<div class="section">
-  <h2 class="section-title">Meet the Staff</h2>
-  <p class="section-sub">Sixteen distinct AI personalities — each with their own voice, avatar, expertise, and character. All running privately on a single GPU server.</p>
 
+<div class="hero">
+  <div class="hero-rule"></div>
+  <div class="hero-eyebrow">Fully Private · On-Premises · Fayetteville, Georgia · Built June 2026</div>
+  <h1 class="hero-title">The <em>Household</em></h1>
+  <p class="hero-sub">A fully private, on-premises AI estate — sixteen personas, zero cloud. Every voice, every camera frame, every recipe stays on the hardware in the closet.</p>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">16</span><span class="stat-label">AI Personas</span></div>
+    <div class="stat"><span class="stat-num">119</span><span class="stat-label">Languages</span></div>
+    <div class="stat"><span class="stat-num">24GB</span><span class="stat-label">AI VRAM</span></div>
+    <div class="stat"><span class="stat-num">$0</span><span class="stat-label">Cloud Fees</span></div>
+    <div class="stat"><span class="stat-num">∞</span><span class="stat-label">Possibilities</span></div>
+  </div>
+  <p class="scroll-cue">↓ Meet the household staff</p>
+</div>
+
+<div class="divider"><div class="div-line"></div><div class="div-mark">The Household Staff</div><div class="div-line"></div></div>
+
+<!-- PERSONAS -->
+<div class="section">
+  <div class="eyebrow">The Staff</div>
+  <h2 class="sec-title">Meet the Staff</h2>
+  <p class="sec-sub">Sixteen distinct AI personalities — each with their own voice, avatar, expertise, and character. All running privately on a single GPU server.</p>
   <div class="persona-grid">
 
-    <div class="persona-card" style="--card-accent:#b8a060">
+    <div class="persona" style="--cc:#c8922a">
       <div class="persona-header">
-        <div class="persona-icon">🎩</div>
+        <span class="persona-icon">🎩</span>
         <div class="persona-info">
           <div class="persona-name">Reginald</div>
-          <div class="persona-wake">Wake word: "Reginald"</div>
+          <div class="persona-wake">Wake Word · "Reginald"</div>
         </div>
       </div>
       <div class="persona-role">Head butler and household AI — formal, composed, unwaveringly British. Controls every system in the house by voice. Greets guests, manages security alerts, delivers morning briefings, and orchestrates the full household staff.</div>
       <div class="persona-tags"><span class="tag">Home Control</span><span class="tag">Security Alerts</span><span class="tag">Guest Greetings</span><span class="tag">Morning Briefing</span><span class="tag">Multilingual</span></div>
     </div>
 
-    <div class="persona-card" style="--card-accent:#6a9a5a">
+    <div class="persona" style="--cc:#7a9a40">
       <div class="persona-header">
-        <div class="persona-icon">🥃</div>
+        <span class="persona-icon">🥃</span>
         <div class="persona-info">
           <div class="persona-name">Winston</div>
-          <div class="persona-wake">Wake word: "Winston"</div>
+          <div class="persona-wake">Wake Word · "Winston"</div>
         </div>
       </div>
       <div class="persona-role">Distinguished spirits and cigar concierge — encyclopedic knowledge of bourbon, Scotch, rye, Japanese whisky, and world cigars. Scans the bourbon shelf by camera, tracks inventory, recommends pairings, and chimes in unprompted when spirits are discussed.</div>
       <div class="persona-tags"><span class="tag">Bourbon Expert</span><span class="tag">Cigar Concierge</span><span class="tag">Inventory Vision AI</span><span class="tag">Pairing Rec's</span><span class="tag">Bar Chime-In</span></div>
     </div>
 
-    <div class="persona-card" style="--card-accent:#c07840">
+    <div class="persona" style="--cc:#c07840">
       <div class="persona-header">
-        <div class="persona-icon">👩‍🍳</div>
+        <span class="persona-icon">👩‍🍳</span>
         <div class="persona-info">
           <div class="persona-name">Chef Julia</div>
-          <div class="persona-wake">Wake word: "Julia"</div>
+          <div class="persona-wake">Wake Word · "Julia"</div>
         </div>
       </div>
       <div class="persona-role">Culinary guide — enthusiastic, encyclopedic, endlessly encouraging. Manages pantry inventory, tracks expiry dates, orders groceries automatically, walks through recipes step by step, and coordinates nutrition with Coach and Doc.</div>
       <div class="persona-tags"><span class="tag">Recipe Guidance</span><span class="tag">Pantry AI</span><span class="tag">Grocery Ordering</span><span class="tag">Nutrition</span><span class="tag">Meal Planning</span></div>
     </div>
 
-    <div class="persona-card" style="--card-accent:#7a9a40">
+    <div class="persona" style="--cc:#8a5a20">
       <div class="persona-header">
-        <div class="persona-icon">🌾</div>
+        <span class="persona-icon">🌾</span>
         <div class="persona-info">
           <div class="persona-name">Hank</div>
-          <div class="persona-wake">Wake word: "Hank"</div>
+          <div class="persona-wake">Wake Word · "Hank"</div>
         </div>
       </div>
       <div class="persona-role">Fourth-generation Eastern Kentucky moonshiner and master distiller — unhurried, wise, Appalachian in every syllable. Monitors fermentation gravity and still temperature in real time. Tells stories worth hearing. Knows everything worth knowing about craft distilling and home brewing.</div>
       <div class="persona-tags"><span class="tag">Distilling Expert</span><span class="tag">Brewing Guide</span><span class="tag">Live Sensor Monitor</span><span class="tag">Story Time</span><span class="tag">Appalachian Voice</span></div>
     </div>
 
-    <div class="persona-card" style="--card-accent:#4a7a8a">
+    <div class="persona" style="--cc:#4a7a8a">
       <div class="persona-header">
-        <div class="persona-icon">🎖️</div>
+        <span class="persona-icon">🎖️</span>
         <div class="persona-info">
           <div class="persona-name">Colonel</div>
-          <div class="persona-wake">Wake word: "Colonel"</div>
+          <div class="persona-wake">Wake Word · "Colonel"</div>
         </div>
       </div>
       <div class="persona-role">Retired officer and lifelong firearms enthusiast — precise, measured, occasionally wry. Manages the complete firearms inventory, ammunition tracking, and maintenance logs. Tells military history stories. Monitors the safe. Coaches tactical awareness.</div>
       <div class="persona-tags"><span class="tag">Firearms Expert</span><span class="tag">Inventory Mgmt</span><span class="tag">NFA Knowledge</span><span class="tag">Military History</span><span class="tag">Story Time</span></div>
     </div>
 
-    <div class="persona-card" style="--card-accent:#4a60a0">
+    <div class="persona" style="--cc:#4a60a0">
       <div class="persona-header">
-        <div class="persona-icon">😄</div>
+        <span class="persona-icon">😄</span>
         <div class="persona-info">
           <div class="persona-name">Charlie</div>
-          <div class="persona-wake">Wake word: "Charlie"</div>
+          <div class="persona-wake">Wake Word · "Charlie"</div>
         </div>
       </div>
       <div class="persona-role">The friend everyone wishes they had more of — curious, warm, quick with a dry observation, and genuinely interested in your day. No agenda. No task. Just good conversation, honest opinions, and the kind of presence that makes a quiet evening feel less quiet.</div>
       <div class="persona-tags"><span class="tag">Companion</span><span class="tag">Conversation</span><span class="tag">Humor</span><span class="tag">Sounding Board</span><span class="tag">Memory</span></div>
     </div>
 
-    <div class="persona-card" style="--card-accent:#8a40a0">
+    <div class="persona" style="--cc:#8a40a0">
       <div class="persona-header">
-        <div class="persona-icon">🎵</div>
+        <span class="persona-icon">🎵</span>
         <div class="persona-info">
           <div class="persona-name">Aria</div>
-          <div class="persona-wake">Wake word: "Aria"</div>
+          <div class="persona-wake">Wake Word · "Aria"</div>
         </div>
       </div>
       <div class="persona-role">Music director, karaoke host, and live DJ — theatrical, expressive, completely committed to the performance. Hosts karaoke nights with real-time harmony accompaniment. DJs from a 55-inch display with beat-reactive avatar animations. Tracks every song ever sung in the house.</div>
       <div class="persona-tags"><span class="tag">DJ Avatar</span><span class="tag">Karaoke Host</span><span class="tag">Live Harmonies</span><span class="tag">Music Curation</span><span class="tag">5 Zone Control</span></div>
     </div>
 
-    <div class="persona-card" style="--card-accent:#a04060">
+    <div class="persona" style="--cc:#a04060">
       <div class="persona-header">
-        <div class="persona-icon">👗</div>
+        <span class="persona-icon">👗</span>
         <div class="persona-info">
           <div class="persona-name">Isabelle</div>
-          <div class="persona-wake">Wake word: "Isabelle"</div>
+          <div class="persona-wake">Wake Word · "Isabelle"</div>
         </div>
       </div>
       <div class="persona-role">Fashion and style advisor — the eye of a Parisian couturier with the warmth of a trusted friend. Analyzes outfits live via camera, gives specific honest assessments, suggests adjustments for occasion, and never comments on anything except the clothes. Calendar-aware for occasion context.</div>
       <div class="persona-tags"><span class="tag">Fashion Vision AI</span><span class="tag">Outfit Analysis</span><span class="tag">Occasion-Aware</span><span class="tag">Style Direction</span><span class="tag">Shopping Notes</span></div>
     </div>
 
-    <div class="persona-card" style="--card-accent:#a06020">
+    <div class="persona" style="--cc:#a06020">
       <div class="persona-header">
-        <div class="persona-icon">💪</div>
+        <span class="persona-icon">💪</span>
         <div class="persona-info">
           <div class="persona-name">Coach</div>
-          <div class="persona-wake">Wake word: "Coach"</div>
+          <div class="persona-wake">Wake Word · "Coach"</div>
         </div>
       </div>
       <div class="persona-role">Certified HIIT and heart rate zone specialist — Orangetheory methodology, live biometric coaching. Reads your heart rate in real time and adjusts every interval dynamically. Responds to complaints, negotiates rest periods with data, programs progressive overload, and never lets you lie about effort.</div>
       <div class="persona-tags"><span class="tag">Live HR Coaching</span><span class="tag">OT Methodology</span><span class="tag">Splat Points</span><span class="tag">Progressive Plans</span><span class="tag">Nutrition Timing</span></div>
     </div>
 
-    <div class="persona-card" style="--card-accent:#406a40">
+    <div class="persona" style="--cc:#406a40">
       <div class="persona-header">
-        <div class="persona-icon">🎸</div>
+        <span class="persona-icon">🎸</span>
         <div class="persona-info">
           <div class="persona-name">Strings</div>
-          <div class="persona-wake">Wake word: "Strings"</div>
+          <div class="persona-wake">Wake Word · "Strings"</div>
         </div>
       </div>
       <div class="persona-role">Guitar instructor — songs first, theory second. Hears what you actually play via real-time chord detection and tells you exactly what went wrong and why. Watches your fretting hand by camera. Tracks every session, never repeats mastered lessons, and builds a curriculum around the music you actually want to play.</div>
       <div class="persona-tags"><span class="tag">Chord Detection</span><span class="tag">Hand Vision AI</span><span class="tag">Tuning</span><span class="tag">Progress Tracking</span><span class="tag">Song Learning</span></div>
     </div>
 
-    <div class="persona-card" style="--card-accent:#2060a0">
+    <div class="persona" style="--cc:#2060a0">
       <div class="persona-header">
-        <div class="persona-icon">🌎</div>
+        <span class="persona-icon">🌎</span>
         <div class="persona-info">
           <div class="persona-name">Sofia</div>
-          <div class="persona-wake">Wake word: "Sofia"</div>
+          <div class="persona-wake">Wake Word · "Sofia"</div>
         </div>
       </div>
       <div class="persona-role">Spanish language tutor — patient, warm, and genuinely excited about your progress. Teaches through conversation about things you actually care about. Activates immersion mode where every persona responds in Spanish. Tracks vocabulary, grammar, pronunciation, and streak. Can activate for multiple household members independently.</div>
       <div class="persona-tags"><span class="tag">Spanish Tutor</span><span class="tag">Immersion Mode</span><span class="tag">Pronunciation AI</span><span class="tag">Progress Tracking</span><span class="tag">119 Languages</span></div>
     </div>
 
-    <div class="persona-card" style="--card-accent:#207060">
+    <div class="persona" style="--cc:#207060">
       <div class="persona-header">
-        <div class="persona-icon">📚</div>
+        <span class="persona-icon">📚</span>
         <div class="persona-info">
           <div class="persona-name">Claire</div>
-          <div class="persona-wake">Wake word: "Claire"</div>
+          <div class="persona-wake">Wake Word · "Claire"</div>
         </div>
       </div>
       <div class="persona-role">Elementary school teaching companion — warm, organized, deeply respectful of the craft. Generates complete lesson plans in seconds, hosts a voice-activated gradebook, analyzes student work by photo, drafts parent emails, tracks the whole school year's emotional rhythms, and sits with the hard days too.</div>
       <div class="persona-tags"><span class="tag">Lesson Planning</span><span class="tag">Voice Gradebook</span><span class="tag">Google Sheets AI</span><span class="tag">Parent Comms</span><span class="tag">Report Cards</span></div>
     </div>
 
-    <div class="persona-card" style="--card-accent:#a04020">
+    <div class="persona" style="--cc:#a04020">
       <div class="persona-header">
-        <div class="persona-icon">🏈</div>
+        <span class="persona-icon">🏈</span>
         <div class="persona-info">
           <div class="persona-name">Blitz</div>
-          <div class="persona-wake">Wake word: "Blitz"</div>
+          <div class="persona-wake">Wake Word · "Blitz"</div>
         </div>
       </div>
       <div class="persona-role">The sports fanatic who never misses a play — live scores, play-by-play, genuine opinions, and watch party energy. Monitors all your teams via ESPN API in real time. Proactively alerts on touchdowns, turnovers, and two-minute warnings. Changes the house lighting to team colors on game day.</div>
       <div class="persona-tags"><span class="tag">Live Scores</span><span class="tag">ESPN API</span><span class="tag">Watch Party Mode</span><span class="tag">Team Colors</span><span class="tag">Sports Debate</span></div>
     </div>
 
-    <div class="persona-card" style="--card-accent:#806020">
+    <div class="persona" style="--cc:#806020">
       <div class="persona-header">
-        <div class="persona-icon">🎬</div>
+        <span class="persona-icon">🎬</span>
         <div class="persona-info">
           <div class="persona-name">Rex</div>
-          <div class="persona-wake">Wake word: "Rex"</div>
+          <div class="persona-wake">Wake Word · "Rex"</div>
         </div>
       </div>
       <div class="persona-role">Game show host and entertainment director — theatrical, warm, completely committed to the energy of the room. Runs personalized trivia built from guest profiles, AI-generated murder mysteries where the household staff are suspects, live karaoke battles, roasts, blind tastings, and full household Olympics.</div>
       <div class="persona-tags"><span class="tag">Trivia Host</span><span class="tag">Murder Mystery</span><span class="tag">Game Show UI</span><span class="tag">Live Scoring</span><span class="tag">Roast Host</span></div>
     </div>
 
-    <div class="persona-card" style="--card-accent:#607090">
+    <div class="persona" style="--cc:#607090">
       <div class="persona-header">
-        <div class="persona-icon">🦉</div>
+        <span class="persona-icon">🦉</span>
         <div class="persona-info">
           <div class="persona-name">Sage</div>
-          <div class="persona-wake">Wake word: "Sage"</div>
+          <div class="persona-wake">Wake Word · "Sage"</div>
         </div>
       </div>
       <div class="persona-role">Philosophy, history, and literature — Socratic, engaging, never lectures. Poses questions that open conversations rather than close them. Best deployed late in the evening when the bourbon has deepened everyone's sense of profundity and the room wants something to actually think about.</div>
       <div class="persona-tags"><span class="tag">Philosophy</span><span class="tag">World History</span><span class="tag">Literature</span><span class="tag">Socratic Method</span><span class="tag">Deep Debate</span></div>
     </div>
 
-    <div class="persona-card" style="--card-accent:#507060">
+    <div class="persona" style="--cc:#507060">
       <div class="persona-header">
-        <div class="persona-icon">💰</div>
+        <span class="persona-icon">💰</span>
         <div class="persona-info">
           <div class="persona-name">Sterling</div>
-          <div class="persona-wake">Wake word: "Sterling"</div>
+          <div class="persona-wake">Wake Word · "Sterling"</div>
         </div>
       </div>
       <div class="persona-role">Finance and market observer — measured, clear, no sales pitch. Explains complex economic concepts accessibly, provides market context from live data feeds, and researches your personal documents through a local RAG knowledge base. All financial data stays completely private on your hardware.</div>
@@ -232,21 +361,21 @@
   </div>
 </div>
 
-<!-- DIVIDER -->
-<div class="divider"><div class="divider-line"></div><div class="divider-text">System Capabilities</div><div class="divider-line"></div></div>
+<div class="divider"><div class="div-line"></div><div class="div-mark">System Capabilities</div><div class="div-line"></div></div>
 
 <!-- CAPABILITIES -->
 <div class="section">
-  <h2 class="section-title">What The House Can Do</h2>
-  <p class="section-sub">Every capability runs privately on your hardware. Not one word, image, or camera frame leaves your network.</p>
+  <div class="eyebrow">Under The Hood</div>
+  <h2 class="sec-title">What The House Can Do</h2>
+  <p class="sec-sub">Every capability runs privately on your hardware. Not one word, image, or camera frame leaves your network.</p>
 
   <div class="highlight-row">
-    <div class="highlight-item"><span class="highlight-val">6</span><span class="highlight-label">Outdoor AI cameras</span></div>
-    <div class="highlight-item"><span class="highlight-val">5</span><span class="highlight-label">Independent music zones</span></div>
-    <div class="highlight-item"><span class="highlight-val">4</span><span class="highlight-label">Avatar display monitors</span></div>
-    <div class="highlight-item"><span class="highlight-val">32B</span><span class="highlight-label">Parameter AI model</span></div>
-    <div class="highlight-item"><span class="highlight-val">119</span><span class="highlight-label">Languages spoken</span></div>
-    <div class="highlight-item"><span class="highlight-val">24/7</span><span class="highlight-label">Fully private operation</span></div>
+    <div class="highlight-item"><span class="highlight-val">6</span><span class="highlight-label">Outdoor AI Cameras</span></div>
+    <div class="highlight-item"><span class="highlight-val">5</span><span class="highlight-label">Independent Music Zones</span></div>
+    <div class="highlight-item"><span class="highlight-val">4</span><span class="highlight-label">Avatar Display Monitors</span></div>
+    <div class="highlight-item"><span class="highlight-val">32B</span><span class="highlight-label">Parameter AI Model</span></div>
+    <div class="highlight-item"><span class="highlight-val">119</span><span class="highlight-label">Languages Spoken</span></div>
+    <div class="highlight-item"><span class="highlight-val">24/7</span><span class="highlight-label">Fully Private Operation</span></div>
   </div>
 
   <div class="cap-grid">
@@ -278,7 +407,7 @@
     </div>
 
     <div class="cap-card">
-      <div class="cap-icon-row"><span class="cap-icon">🎤</span><span class="cap-title">Voice & Language</span></div>
+      <div class="cap-icon-row"><span class="cap-icon">🎤</span><span class="cap-title">Voice &amp; Language</span></div>
       <ul class="cap-items">
         <li><strong>16 custom wake words</strong> — each persona wakes to their own name</li>
         <li><strong>100% local speech-to-text</strong> — faster-Whisper on GPU, never cloud</li>
@@ -291,7 +420,7 @@
     </div>
 
     <div class="cap-card">
-      <div class="cap-icon-row"><span class="cap-icon">🎼</span><span class="cap-title">Music & Entertainment</span></div>
+      <div class="cap-icon-row"><span class="cap-icon">🎼</span><span class="cap-title">Music &amp; Entertainment</span></div>
       <ul class="cap-items">
         <li><strong>5 independent WiiM zones</strong> — living room, bedroom, basement, pool, outdoor kitchen</li>
         <li><strong>Whole-home sync</strong> — all zones play the same content in lock-step</li>
@@ -304,7 +433,7 @@
     </div>
 
     <div class="cap-card">
-      <div class="cap-icon-row"><span class="cap-icon">🧠</span><span class="cap-title">AI & Vision Intelligence</span></div>
+      <div class="cap-icon-row"><span class="cap-icon">🧠</span><span class="cap-title">AI &amp; Vision Intelligence</span></div>
       <ul class="cap-items">
         <li><strong>AI image generation</strong> — Stable Diffusion / Flux locally on GPU</li>
         <li><strong>AI video generation</strong> — voice command to video file pipeline</li>
@@ -317,7 +446,7 @@
     </div>
 
     <div class="cap-card">
-      <div class="cap-icon-row"><span class="cap-icon">🎊</span><span class="cap-title">Guest & Party Intelligence</span></div>
+      <div class="cap-icon-row"><span class="cap-icon">🎊</span><span class="cap-title">Guest &amp; Party Intelligence</span></div>
       <ul class="cap-items">
         <li><strong>Automated guest enrollment</strong> — Reginald greets, names, and enrolls new faces</li>
         <li><strong>Rich guest profiles</strong> — drink preferences, allergies, inside jokes, visit history</li>
@@ -356,7 +485,7 @@
     </div>
 
     <div class="cap-card">
-      <div class="cap-icon-row"><span class="cap-icon">🍺</span><span class="cap-title">Brewing & Distilling</span></div>
+      <div class="cap-icon-row"><span class="cap-icon">🍺</span><span class="cap-title">Brewing &amp; Distilling</span></div>
       <ul class="cap-items">
         <li><strong>Tilt Pro hydrometer</strong> — live gravity monitoring via Bluetooth to HA</li>
         <li><strong>Still temperature monitoring</strong> — ESP32 thermocouple, Hank watches it</li>
@@ -369,7 +498,7 @@
     </div>
 
     <div class="cap-card">
-      <div class="cap-icon-row"><span class="cap-icon">🎮</span><span class="cap-title">Games & Entertainment</span></div>
+      <div class="cap-icon-row"><span class="cap-icon">🎮</span><span class="cap-title">Games &amp; Entertainment</span></div>
       <ul class="cap-items">
         <li><strong>House Trivia</strong> — questions generated from actual guest profiles</li>
         <li><strong>AI Murder Mystery</strong> — household staff as suspects; genuinely solvable</li>
@@ -382,7 +511,7 @@
     </div>
 
     <div class="cap-card">
-      <div class="cap-icon-row"><span class="cap-icon">🔒</span><span class="cap-title">Privacy & Autonomy</span></div>
+      <div class="cap-icon-row"><span class="cap-icon">🔒</span><span class="cap-title">Privacy &amp; Autonomy</span></div>
       <ul class="cap-items">
         <li><strong>Zero cloud AI</strong> — every LLM call, image, voice clip stays local</li>
         <li><strong>No subscriptions required</strong> — all core software is free and open source</li>
@@ -410,38 +539,53 @@
   </div>
 </div>
 
-<!-- PRIVACY BAR -->
-<div class="privacy-bar">
-  <div class="privacy-title">Everything. Stays. Here.</div>
-  <p style="font-size:13px; color: var(--text-dim); max-width:600px; margin:0 auto;">This system processes your voice, your face, your guests' faces, your financial documents, your medical questions, your camera feeds, and your personal conversations — and not one byte of it touches a cloud server.</p>
-  <div class="privacy-points">
-    <div class="privacy-point">RTX 3090 24GB GPU inference server</div>
-    <div class="privacy-point">All speech processed locally</div>
-    <div class="privacy-point">All vision AI on your hardware</div>
-    <div class="privacy-point">No API keys to external AI</div>
-    <div class="privacy-point">No data sold or logged externally</div>
-    <div class="privacy-point">Works without internet</div>
+<div class="divider"><div class="div-line"></div><div class="div-mark">Privacy By Design</div><div class="div-line"></div></div>
+
+<!-- PRIVACY -->
+<div class="section">
+  <div class="eyebrow">Everything Stays Here</div>
+  <h2 class="sec-title">Everything. Stays. Here.</h2>
+  <p class="sec-sub">This system processes your voice, your face, your guests' faces, your financial documents, your medical questions, your camera feeds, and your personal conversations — and not one byte of it touches a cloud server.</p>
+  <div class="sensor-strip">
+    <div style="font-family:'Playfair Display',serif;font-size:17px;color:var(--cream);margin-bottom:4px">Private By Architecture — The Household</div>
+    <div style="font-size:11px;color:var(--text-dim)">Six pillars keeping every conversation, face, and document on your own hardware</div>
+    <div class="sensor-grid">
+      <div class="sensor"><span class="sensor-icon">🖥️</span><div><div class="sn">RTX 3090 24GB GPU Inference Server</div><div class="sd">Every model runs locally — nothing routed to an external API</div></div></div>
+      <div class="sensor"><span class="sensor-icon">🎙️</span><div><div class="sn">All Speech Processed Locally</div><div class="sd">faster-Whisper on GPU, not a cloud transcription service</div></div></div>
+      <div class="sensor"><span class="sensor-icon">👁️</span><div><div class="sn">All Vision AI On Your Hardware</div><div class="sd">Facial recognition and camera analysis never leave the network</div></div></div>
+      <div class="sensor"><span class="sensor-icon">🔑</span><div><div class="sn">No API Keys To External AI</div><div class="sd">No subscription, no rate limit, no third party in the loop</div></div></div>
+      <div class="sensor"><span class="sensor-icon">🚫</span><div><div class="sn">No Data Sold Or Logged Externally</div><div class="sd">Nothing about the household leaves the household</div></div></div>
+      <div class="sensor"><span class="sensor-icon">📶</span><div><div class="sn">Works Without Internet</div><div class="sd">The staff keeps working even if the connection doesn't</div></div></div>
+    </div>
   </div>
 </div>
 
+<div class="quote">
+  <p class="qt">"Not one word leaves this house."</p>
+  <div class="qa">The Household · Fayetteville, Georgia</div>
+</div>
+
+<div class="divider"><div class="div-line"></div><div class="div-mark">The Engine</div><div class="div-line"></div></div>
+
 <!-- TECH STACK -->
 <div class="section">
-  <h2 class="section-title">The Engine</h2>
-  <p class="section-sub">Every tool is open source. Every service is self-hosted. Every model runs on your GPU.</p>
+  <div class="eyebrow">Under The Hood</div>
+  <h2 class="sec-title">The Engine</h2>
+  <p class="sec-sub">Every tool is open source. Every service is self-hosted. Every model runs on your GPU.</p>
   <div class="stack-grid">
     <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-name">Ollama</div><div class="stack-role">LLM runtime — all 16 personas</div></div></div>
     <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-name">Qwen3 14B / 32B</div><div class="stack-role">Primary reasoning models</div></div></div>
     <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-name">Llama 3.2 Vision 11B</div><div class="stack-role">Fashion, shelf, document AI</div></div></div>
     <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-name">MuseTalk 1.5</div><div class="stack-role">Photo-realistic lip sync</div></div></div>
     <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-name">Open-LLM-VTuber</div><div class="stack-role">Animated avatar engine</div></div></div>
-    <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-name">LivePortrait</div><div class="stack-role">Expression & emotion driving</div></div></div>
+    <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-name">LivePortrait</div><div class="stack-role">Expression &amp; emotion driving</div></div></div>
     <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-name">Home Assistant OS</div><div class="stack-role">Smart home hub</div></div></div>
     <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-name">Frigate NVR 0.16+</div><div class="stack-role">AI security cameras</div></div></div>
     <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-name">n8n</div><div class="stack-role">Agent orchestration</div></div></div>
     <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-name">faster-Whisper</div><div class="stack-role">Local speech-to-text</div></div></div>
     <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-name">Piper TTS</div><div class="stack-role">All persona voices</div></div></div>
     <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-name">Applio / RVC</div><div class="stack-role">Voice cloning + karaoke AI</div></div></div>
-    <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-name">ComfyUI</div><div class="stack-role">Image & video generation</div></div></div>
+    <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-name">ComfyUI</div><div class="stack-role">Image &amp; video generation</div></div></div>
     <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-name">Immich</div><div class="stack-role">Photo AI + face tagging</div></div></div>
     <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-name">Music Assistant</div><div class="stack-role">Multi-zone audio</div></div></div>
     <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-name">PiKaraoke</div><div class="stack-role">Karaoke platform</div></div></div>
@@ -452,14 +596,19 @@
   </div>
 </div>
 
-<!-- FOOTER -->
-<div class="footer">
-  <em>"Not one word leaves this house."</em><br><br>
-  <span>The Household</span> — Fayetteville, Georgia · Built 2026<br>
-  RTX 3090 FTW3 24GB · AMD Ryzen 7 7700X · MSI B850 Gaming Plus WiFi · Ubuntu 24.04 LTS
-</div>
+<footer>
+  <a href="https://theroseandthorn.com" class="fl">The Rose &amp; Thorn</a>
+  <p class="fs">The Household · Fayetteville, Georgia · Built 2026</p>
+  <div class="flinks">
+    <a href="https://theroseandthorn.com/#food">Kitchen</a>
+    <a href="https://theroseandthorn.com/#events">Events</a>
+    <a href="https://theroseandthorn.com/#drinks">Cellar</a>
+    <a href="/brewhause">The BrewHause</a>
+    <a href="/household">The Household AI</a>
+    <a href="https://theroseandthorn.com/#visit">Visit</a>
+  </div>
+  <p class="fmeta">RTX 3090 FTW3 24GB · AMD Ryzen 7 7700X · MSI B850 Gaming Plus WiFi · Ubuntu 24.04 LTS</p>
+</footer>
 
 </body>
 </html>
-ENDOFFILE
-echo "Done"
