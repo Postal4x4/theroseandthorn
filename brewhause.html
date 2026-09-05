@@ -1,102 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BrewHause — The Rose & Thorn Estate</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.2.0/main.min.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BrewHause — The Rose & Thorn</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/main.css">
 </head>
+
 <body>
 
-<header>
-    <h1>BrewHause — The Rose & Thorn</h1>
-    <p>Estate</p>
+<nav>
+  <a class="nav-logo" href="index.html">The Rose & Thorn</a>
+
+  <ul class="nav-links">
+    <li><a href="index.html">Estate</a></li>
+    <li><a href="brewhause.html" class="active">BrewHause</a></li>
+    <li><a href="household.html">Household</a></li>
+    <li><a href="architecture.html">Architecture</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <h1>BrewHause</h1>
+  <p>
+    Where craft becomes ritual.<br>
+    Where fire, grain, and time shape what is poured.
+  </p>
 </header>
 
 <section class="section">
-    <h2>BrewHause</h2>
-    <p>Where craft becomes ritual.<br>
-    Where fire, grain, and time shape what is poured.</p>
 
-    <h2>The Philosophy of Craft</h2>
-    <p>BrewHause is not a production space. It is a controlled environment of transformation —<br>
-    where ingredients become memory through heat, time, and patience.</p>
+  <h2>The Philosophy of Craft</h2>
 
-    <h2>The Craft Systems</h2>
-    <ul>
-        <li><strong>Fermentation</strong> — Living transformation guided by time, temperature, and culture.</li>
-        <li><strong>Distillation</strong> — Refinement through separation — essence extracted with precision.</li>
-        <li><strong>Barrel Aging</strong> — Oak, smoke, and patience shaping depth and character.</li>
-        <li><strong>Smoke & Heat</strong> — Controlled fire used to define flavor, texture, and memory.</li>
-    </ul>
+  <p class="section-sub">
+    BrewHause is not a production space. It is a controlled environment of transformation —
+    where ingredients become memory through heat, time, and patience.
+  </p>
 
-    <h2>Current Selections</h2>
-    <ul>
-        <li><strong>Estate Amber Ale</strong> — Warm malt, oak undertones, slow finish.</li>
-        <li><strong>Rose Sweet Stout</strong> — Dark roast with a sweet caramel finish.</li>
-        <li><strong>Rum Mash</strong> – A mash destined for distillation into a fine rum later this season.</li>
-    </ul>
-
-    <h2>The Process</h2>
-    <p>Every batch follows a disciplined arc: selection → preparation → transformation → maturation → release.</p>
 </section>
 
-<div id="brew-calendar" class="section"></div>
+<section class="section">
 
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.2.0/main.min.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  var calendarEl = document.getElementById('brew-calendar');
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-    headerToolbar: { left: '', center: 'title', right: '' },
-    initialView: 'dayGridMonth',
-    events: [
-      { title: 'Brew Day', date: '2024-09-07', backgroundColor: '#c8922a' }
-    ],
-    eventClick: function(info) {
-      info.jsEvent.preventDefault();
-      showRequestForm(info.event.title, info.event.start);
-    },
-    dayMaxEvents: true
-  });
-  calendar.render();
+  <h2>The Craft Systems</h2>
 
-  window.showRequestForm = function(eventTitle, eventDate) {
-    var formHtml = `
-      <div id="brew-request" class="card">
-        <h4>Request a Brew Day / Recipe</h4>
-        <p>Event: ${eventTitle} – ${eventDate.toLocaleDateString()}</p>
-        <form id="brewForm">
-          <label>Name:<br><input type="text" name="name" required></label>
-          <label>Email:<br><input type="email" name="email" required></label>
-          <label>Message (optional):<br><textarea name="msg"></textarea></label>
-          <button type="submit">Send Request</button>
-        </form>
-      </div>`;
-    document.getElementById('brew-calendar').insertAdjacentHTML('beforeend', formHtml);
+  <div class="grid">
 
-    document.getElementById('brewForm').addEventListener('submit', function(e){
-      e.preventDefault();
-      var data = new FormData(this);
-      fetch('/api/submitBrewRequest', { 
-        method: 'POST',
-        body: JSON.stringify({
-          name: data.get('name'),
-          email: data.get('email'),
-          msg: data.get('msg')
-        }),
-        headers: {'Content-Type': 'application/json'}
-      }).then(r=>r.json()).then(res=>{
-        alert('Your request has been sent. We will respond shortly.');
-        this.reset();
-        document.querySelector('#brew-request').remove();
-      });
-    });
-  };
-});
-</script>
+    <div class="card">
+      <h3>Fermentation</h3>
+      <p>Living transformation guided by time, temperature, and culture.</p>
+    </div>
 
+    <div class="card">
+      <h3>Distillation</h3>
+      <p>Refinement through separation — essence extracted with precision.</p>
+    </div>
+
+    <div class="card">
+      <h3>Barrel Aging</h3>
+      <p>Oak, smoke, and patience shaping depth and character.</p>
+    </div>
+
+    <div class="card">
+      <h3>Smoke & Heat</h3>
+      <p>Controlled fire used to define flavor, texture, and memory.</p>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="section">
+
+  <h2>Current Selections</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <h3>Estate Amber Ale</h3>
+      <p>Warm malt, oak undertones, slow finish.</p>
+    </div>
+
+    <div class="card">
+      <h3>Thorn Barrel Rye</h3>
+      <p>Spiced grain with a sharp, aged profile.</p>
+    </div>
+
+    <div class="card">
+      <h3>Rose Smoke Stout</h3>
+      <p>Dark roast with floral smoke finish.</p>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="section">
+
+  <h2>The Process</h2>
+
+  <p class="section-sub">
+    Every batch follows a disciplined arc: selection → preparation → transformation → maturation → release.
+  </p>
+
+</section>
+
+<footer>
+  BrewHause — The Rose & Thorn Estate
+</footer>
+  
+<script src="assets/js/estate.js"></script>
+<script src="assets/js/site.js"></script>
+  
 </body>
 </html>
