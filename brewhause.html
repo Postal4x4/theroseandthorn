@@ -1,101 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>BrewHause — The Rose & Thorn Estate</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.2.0/main.min.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Architecture — The Rose & Thorn</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/main.css">
 </head>
+
 <body>
 
-<header>
-    <h1>BrewHause — The Rose & Thorn</h1>
-    <p>Estate</p>
+<nav>
+  <a class="nav-logo" href="index.html">The Rose & Thorn</a>
+
+  <ul class="nav-links">
+    <li><a href="index.html">Estate</a></li>
+    <li><a href="brewhause.html">BrewHause</a></li>
+    <li><a href="household.html">Household</a></li>
+    <li><a href="architecture.html" class="active">Architecture</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <h1>Architecture</h1>
+  <p>
+    The structural blueprint of The Rose & Thorn — where space, function, and intelligence converge.
+  </p>
 </header>
 
 <section class="section">
-    <h2>BrewHause</h2>
-    <p>Where craft becomes ritual.<br>
-    Where fire, grain, and time shape what is poured.</p>
 
-    <h2>The Philosophy of Craft</h2>
-    <p>BrewHause is not a production space. It is a controlled environment of transformation —<br>
-    where ingredients become memory through heat, time, and patience.</p>
+  <h2>The Estate Model</h2>
 
-    <h2>The Craft Systems</h2>
-    <ul>
-        <li><strong>Fermentation</strong> — Living transformation guided by time, temperature, and culture.</li>
-        <li><strong>Distillation</strong> — Refinement through separation — essence extracted with precision.</li>
-        <li><strong>Barrel Aging</strong> — Oak, smoke, and patience shaping depth and character.</li>
-        <li><strong>Smoke & Heat</strong> — Controlled fire used to define flavor, texture, and memory.</li>
-    </ul>
+  <p class="section-sub">
+    The Rose & Thorn is not a single structure — it is a coordinated system of environments,
+    each with a defined purpose within the estate intelligence network.
+  </p>
 
-    <h2>Current Selections</h2>
-    <ul>
-        <li><strong>Estate Amber Ale</strong> — Warm malt, oak undertones, slow finish.</li>
-        <li><strong>Rose Sweet Stout</strong> — Dark roast with a sweet caramel finish.</li>
-        <li><strong>Rum Mash</strong> – A mash destined for distillation into a fine rum later this season.</li>
-    </ul>
-
-    <h2>The Process</h2>
-    <p>Every batch follows a disciplined arc: selection → preparation → transformation → maturation → release.</p>
 </section>
 
-<div id="brew-calendar" class="section"></div>
+<section class="section">
 
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.2.0/main.min.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  var calendarEl = document.getElementById('brew-calendar');
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-    headerToolbar: { left: '', center: 'title', right: '' },
-    initialView: 'dayGridMonth',
-    events: [
-      { title: 'Brew Day', date: '2024-09-07', backgroundColor: '#c8922a' }
-    ],
-    eventClick: function(info) {
-      info.jsEvent.preventDefault();
-      showRequestForm(info.event.title, info.event.start);
-    },
-    dayMaxEvents: true
-  });
-  calendar.render();
+  <h2>Core Zones</h2>
 
-  window.showRequestForm = function(eventTitle, eventDate) {
-    var formHtml = `
-      <div id="brew-request" class="card">
-        <h4>Request a Brew Day / Recipe</h4>
-        <p>Event: ${eventTitle} – ${eventDate.toLocaleDateString()}</p>
-        <form id="brewForm">
-          <label>Name:<br><input type="text" name="name" required></label>
-          <label>Email:<br><input type="email" name="email" required></label>
-          <label>Message (optional):<br><textarea name="msg"></textarea></label>
-          <button type="submit">Send Request</button>
-        </form>
-      </div>`;
-    document.getElementById('brew-calendar').insertAdjacentHTML('beforeend', formHtml);
+  <div class="grid">
 
-    document.getElementById('brewForm').addEventListener('submit', function(e){
-      e.preventDefault();
-      var data = new FormData(this);
-      fetch('/api/submitBrewRequest', { 
-        method: 'POST',
-        body: JSON.stringify({
-          name: data.get('name'),
-          email: data.get('email'),
-          msg: data.get('msg')
-        }),
-        headers: {'Content-Type': 'application/json'}
-      }).then(r=>r.json()).then(res=>{
-        alert('Your request has been sent. We will respond shortly.');
-        this.reset();
-        document.querySelector('#brew-request').remove();
-      });
-    });
-  };
-});
-</script>
+    <div class="card">
+      <h3>Main House</h3>
+      <p>Primary residential and hospitality environment. Central coordination hub.</p>
+    </div>
 
+    <div class="card">
+      <h3>BrewHause</h3>
+      <p>Production environment for fermentation, distillation, and craft systems.</p>
+    </div>
+
+    <div class="card">
+      <h3>Household Layer</h3>
+      <p>Intelligence network of residents managing estate operations and continuity.</p>
+    </div>
+
+    <div class="card">
+      <h3>Garden & Grounds</h3>
+      <p>Environmental extension of the estate — seasonal, atmospheric, and adaptive.</p>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="section">
+
+  <h2>System Relationships</h2>
+
+  <p class="section-sub">
+    Each zone is interconnected through shared intelligence systems: memory, scheduling,
+    environmental control, and hospitality orchestration.
+  </p>
+
+</section>
+
+<section class="section">
+
+  <h2>Design Philosophy</h2>
+
+  <p class="section-sub">
+    The estate is designed as a living structure — not static architecture, but a responsive
+    environment shaped by its residents, rituals, and routines.
+  </p>
+
+</section>
+
+<section class="section">
+
+  <h2>Everything. Stays. Here.</h2>
+
+  <p class="section-sub">
+    This system processes your voice, your face, your guests' faces, your financial documents, your camera feeds,
+    and your personal conversations — and not one byte of it touches a cloud server.
+  </p>
+
+  <div class="privacy-strip">
+    <h3>Private By Architecture</h3>
+    <p>RTX 3090 24GB GPU inference server · faster-Whisper on GPU · local facial recognition · no external API keys</p>
+    <div class="privacy-points">
+      <span>✦ RTX 3090 24GB GPU inference server</span>
+      <span>✦ All speech processed locally</span>
+      <span>✦ All vision AI on your hardware</span>
+      <span>✦ No API keys to external AI</span>
+      <span>✦ No data sold or logged externally</span>
+      <span>✦ Works without internet</span>
+    </div>
+  </div>
+
+</section>
+
+<section class="section">
+
+  <h2>The Engine</h2>
+
+  <p class="section-sub">
+    Every tool is open source. Every service is self-hosted. Every model runs on your GPU.
+  </p>
+
+  <div class="grid">
+
+    <div class="card">
+      <h3>Ollama</h3>
+      <p>LLM runtime — all 16 personas</p>
+    </div>
+
+    <div class="card">
+      <h3>Qwen3 14B / 32B</h3>
+      <p>Primary reasoning models</p>
+    </div>
+
+    <div class="card">
+      <h3>Llama 3.2 Vision 11B</h3>
+      <p>Fashion, shelf, document AI</p>
+    </div>
+
+    <div class="card">
+      <h3>MuseTalk 1.5</h3>
+      <p>Photo-realistic lip sync</p>
+    </div>
+
+    <div class="card">
+      <h3>Home Assistant OS</h3>
+      <p>Smart home hub</p>
+    </div>
+
+    <div class="card">
+      <h3>Frigate NVR 0.16+</h3>
+      <p>AI security cameras</p>
+    </div>
+
+    <div class="card">
+      <h3>n8n</h3>
+      <p>Agent orchestration</p>
+    </div>
+
+    <div class="card">
+      <h3>faster-Whisper</h3>
+      <p>Local speech-to-text</p>
+    </div>
+
+    <div class="card">
+      <h3>Piper TTS</h3>
+      <p>All persona voices</p>
+    </div>
+
+    <div class="card">
+      <h3>ComfyUI</h3>
+      <p>Image & video generation</p>
+    </div>
+
+    <div class="card">
+      <h3>Grocy</h3>
+      <p>Pantry inventory</p>
+    </div>
+
+    <div class="card">
+      <h3>Notion + n8n</h3>
+      <p>Household memory</p>
+    </div>
+
+  </div>
+
+</section>
+
+<footer>
+  BrewHause — The Rose & Thorn Estate
+</footer>
+  
+<script src="assets/js/estate.js"></script>
+<script src="assets/js/site.js"></script>
+  
 </body>
 </html>
