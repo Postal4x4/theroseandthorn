@@ -40,6 +40,246 @@
     each with a defined purpose within the estate intelligence network.
   </p>
 
+  <!-- HARDWARE BUILD CHART — inserted into The Estate Model section -->
+  <div class="hw-chart" style="margin-top:2rem">
+
+    <style>
+    .hw-chart { font-family: 'Lato', sans-serif; }
+    .hw-cat { margin-bottom: 12px; border: 1px solid rgba(200,146,42,0.2); overflow: hidden; }
+    .hw-cat-btn {
+      width: 100%; border: none; padding: 14px 20px; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      text-align: left; transition: opacity 0.15s;
+    }
+    .hw-cat-btn:hover { opacity: 0.9; }
+    .hw-cat-title { font-family: 'Playfair Display', serif; font-size: 15px; color: #f2ead8; margin-bottom: 3px; }
+    .hw-cat-desc { font-size: 11px; color: rgba(242,234,216,0.55); letter-spacing: 0.04em; }
+    .hw-badge {
+      border-radius: 4px; padding: 3px 9px; font-size: 11px;
+      font-weight: 700; letter-spacing: 0.06em; white-space: nowrap;
+    }
+    .hw-badge-done { background: rgba(42,138,58,0.2); border: 1px solid rgba(42,138,58,0.4); color: #6ade88; }
+    .hw-badge-need { background: rgba(200,146,42,0.12); border: 1px solid rgba(200,146,42,0.35); color: #c8922a; }
+    .hw-badge-save { background: rgba(180,160,20,0.12); border: 1px solid rgba(180,160,20,0.3); color: #c8c060; }
+    .hw-chevron { color: rgba(242,234,216,0.4); font-size: 12px; flex-shrink: 0; }
+    .hw-table-wrap { overflow-x: auto; }
+    .hw-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .hw-table thead th {
+      padding: 7px 14px; text-align: left; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: rgba(242,234,216,0.4);
+      border-bottom: 1px solid rgba(200,146,42,0.12); background: rgba(0,0,0,0.3);
+    }
+    .hw-table tbody tr { border-bottom: 1px solid rgba(200,146,42,0.07); }
+    .hw-table tbody tr.done { opacity: 0.7; }
+    .hw-table tbody td { padding: 9px 14px; vertical-align: middle; }
+    .hw-table tfoot td { padding: 8px 14px; font-size: 12px; font-weight: 700; background: rgba(0,0,0,0.25); border-top: 1px solid rgba(200,146,42,0.15); }
+    .hw-summary {
+      margin-top: 16px; background: linear-gradient(135deg, rgba(26,58,76,0.5) 0%, rgba(10,26,10,0.5) 100%);
+      border: 1px solid rgba(200,146,42,0.25); padding: 20px 24px;
+    }
+    .hw-summary-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #c8922a; margin-bottom: 14px; font-weight: 700; }
+    .hw-summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+    .hw-stat { text-align: center; }
+    .hw-stat-val { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 3px; }
+    .hw-stat-lbl { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(242,234,216,0.45); }
+    </style>
+
+    <script>
+    function hwToggle(id) {
+      var body = document.getElementById('hw-body-' + id);
+      var chev = document.getElementById('hw-chev-' + id);
+      if (body.style.display === 'none' || body.style.display === '') {
+        body.style.display = 'block';
+        chev.textContent = '▲';
+      } else {
+        body.style.display = 'none';
+        chev.textContent = '▼';
+      }
+    }
+    </script>
+
+    <!-- GPU SERVER -->
+    <div class="hw-cat">
+      <button class="hw-cat-btn" style="background: linear-gradient(90deg,#0e2236 0%,#0a1520 100%);" onclick="hwToggle('gpu')">
+        <div style="flex:1">
+          <div class="hw-cat-title">GPU AI Inference Server — Main PC</div>
+          <div class="hw-cat-desc">Primary workhorse — LLMs, avatars, ComfyUI, voice pipeline, daily desktop</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+          <span class="hw-badge hw-badge-done">✅ ~$2,222 done</span>
+          <span class="hw-badge hw-badge-need">~$103 needed</span>
+          <span class="hw-chevron" id="hw-chev-gpu">▼</span>
+        </div>
+      </button>
+      <div id="hw-body-gpu" style="display:none">
+        <div class="hw-table-wrap">
+          <table class="hw-table">
+            <thead><tr><th></th><th>Component</th><th>Spec / Model</th><th>Source</th><th>Price</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr class="done"><td>✅</td><td style="color:#6ade88;text-decoration:line-through">CPU</td><td style="color:#c9d1d9">AMD Ryzen 7 7700X (8-core AM5)</td><td style="color:#8b949e">Purchased</td><td style="color:#6ade88">✅ Done</td><td style="color:#6ade88;font-size:12px">✅ PURCHASED</td></tr>
+              <tr class="done"><td>✅</td><td style="color:#6ade88;text-decoration:line-through">Motherboard</td><td style="color:#c9d1d9">GIGABYTE B850 AORUS Elite WiFi7 ICE — 14+2+2 VRM, 3× M.2, PCIe 5.0, WiFi 7</td><td style="color:#8b949e">Purchased</td><td style="color:#6ade88">✅ Done</td><td style="color:#6ade88;font-size:12px">✅ PURCHASED — replaces MSI B850; white ICE; 5-yr warranty</td></tr>
+              <tr class="done"><td>✅</td><td style="color:#6ade88;text-decoration:line-through">CPU Cooler</td><td style="color:#c9d1d9">Thermalright Peerless Assassin 120 SE</td><td style="color:#8b949e">On Hand</td><td style="color:#6ade88">✅ Done</td><td style="color:#6ade88;font-size:12px">✅ ON HAND — ready to install</td></tr>
+              <tr class="done"><td>✅</td><td style="color:#6ade88;text-decoration:line-through">GPU</td><td style="color:#c9d1d9">ASUS ROG Strix RTX 3090 White OC 24GB — 2× HDMI 2.1 + 3× DP 1.4a</td><td style="color:#8b949e">Amazon Renewed</td><td style="color:#6ade88">✅ Done</td><td style="color:#6ade88;font-size:12px">✅ ON HAND — 24GB VRAM; ready to install</td></tr>
+              <tr class="done"><td>✅</td><td style="color:#6ade88;text-decoration:line-through">Case</td><td style="color:#c9d1d9">Lian Li Lancool 217 White — birch wood accent, 5 fans included</td><td style="color:#8b949e">On Hand</td><td style="color:#6ade88">✅ Done</td><td style="color:#6ade88;font-size:12px">✅ ON HAND — native vertical GPU mount built in</td></tr>
+              <tr class="done"><td>✅</td><td style="color:#6ade88;text-decoration:line-through">Vertical GPU Kit</td><td style="color:#c9d1d9">Lian Li VG4v4 White — PCIe 5.0 riser, anti-sag arm, 5V ARGB</td><td style="color:#8b949e">Owned</td><td style="color:#6ade88">✅ Done</td><td style="color:#6ade88;font-size:12px">✅ ON HAND — native Lancool 217 fit; replaces separate riser cable</td></tr>
+              <tr class="done"><td>✅</td><td style="color:#6ade88;text-decoration:line-through">OS Drive</td><td style="color:#c9d1d9">Samsung 990 Pro 2TB NVMe M.2 PCIe Gen 4</td><td style="color:#8b949e">Owned</td><td style="color:#6ade88">✅ Done</td><td style="color:#6ade88;font-size:12px">✅ OWNED — OS + Docker + Ollama</td></tr>
+              <tr class="done"><td>✅</td><td style="color:#6ade88;text-decoration:line-through">RAM</td><td style="color:#c9d1d9">Crucial Pro DDR5 64GB 5400MHz White — CP2K32G64C40U5W</td><td style="color:#8b949e">Amazon</td><td style="color:#6ade88">✅ Done</td><td style="color:#6ade88;font-size:12px">✅ ON HAND — stable at 5400MHz</td></tr>
+              <tr class="done"><td>✅</td><td style="color:#6ade88;text-decoration:line-through">PSU</td><td style="color:#c9d1d9">Corsair RM1000e 1000W 80+ Gold Fully Modular</td><td style="color:#8b949e">Purchased</td><td style="color:#6ade88">✅ Done</td><td style="color:#6ade88;font-size:12px">✅ ON HAND — Zero RPM below 500W; 7-yr warranty</td></tr>
+              <tr><td></td><td style="color:#f2ead8;font-weight:600">Model Storage</td><td style="color:#c9d1d9">2TB NVMe M.2 PCIe Gen 4 — WD Blue SN580 or Crucial P3 Plus</td><td style="color:#8b949e">Amazon</td><td style="color:#c8922a;font-weight:700">~$85</td><td style="color:#8b949e;font-size:12px">⬜ STILL NEEDED — dedicated AI model storage</td></tr>
+              <tr><td></td><td style="color:#f2ead8;font-weight:600">NVMe Heatsink</td><td style="color:#c9d1d9">EZDIY-FAB Shield White ARGB M.2 Heatsink with 20mm PWM fan</td><td style="color:#8b949e">Amazon</td><td style="color:#c8922a;font-weight:700">~$18</td><td style="color:#8b949e;font-size:12px">⬜ OPTIONAL — white aesthetic; ARGB sync</td></tr>
+              <tr><td></td><td style="color:#2a8a3a;font-weight:600">OS</td><td style="color:#c9d1d9">Ubuntu 24.04 LTS</td><td style="color:#8b949e">Free</td><td style="color:#2a8a3a;font-weight:700">$0</td><td style="color:#8b949e;font-size:12px">Free — best CUDA/Docker/Ollama ecosystem</td></tr>
+            </tbody>
+            <tfoot><tr><td colspan="4" style="text-align:right;color:rgba(242,234,216,0.4);font-size:10px;text-transform:uppercase;letter-spacing:0.1em">Category Total</td><td colspan="2"><span style="color:#6ade88">✅ ~$2,222 done &nbsp;&nbsp;</span><span style="color:#c8922a">~$103 still needed</span></td></tr></tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- BEELINK / HA -->
+    <div class="hw-cat">
+      <button class="hw-cat-btn" style="background: linear-gradient(90deg,#0e2218 0%,#0a1a10 100%);" onclick="hwToggle('ha')">
+        <div style="flex:1">
+          <div class="hw-cat-title">Home Assistant Hub — Beelink S12 Pro</div>
+          <div class="hw-cat-desc">Dedicated Home Assistant OS appliance — already owned and running</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+          <span class="hw-badge hw-badge-done">✅ All owned</span>
+          <span class="hw-chevron" id="hw-chev-ha">▼</span>
+        </div>
+      </button>
+      <div id="hw-body-ha" style="display:none">
+        <div class="hw-table-wrap">
+          <table class="hw-table">
+            <thead><tr><th></th><th>Component</th><th>Spec</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr class="done"><td>✅</td><td style="color:#6ade88;text-decoration:line-through">Beelink S12 Pro</td><td style="color:#c9d1d9">Intel N100 · 16GB DDR4 · 500GB NVMe</td><td style="color:#6ade88;font-size:12px">✅ RUNNING — HA OS live; Wyoming STT + Ollama connected</td></tr>
+              <tr class="done"><td>✅</td><td style="color:#6ade88;text-decoration:line-through">Raspberry Pi 4</td><td style="color:#c9d1d9">Avatar display client / PiKaraoke / voice satellite</td><td style="color:#6ade88;font-size:12px">✅ OWNED</td></tr>
+              <tr class="done"><td>✅</td><td style="color:#6ade88;text-decoration:line-through">Dell Latitude 7350</td><td style="color:#c9d1d9">Roaming avatar display + voice satellite</td><td style="color:#6ade88;font-size:12px">✅ OWNED</td></tr>
+              <tr class="done"><td>✅</td><td style="color:#6ade88;text-decoration:line-through">Meta Quest 3S</td><td style="color:#c9d1d9">Mixed reality avatar upgrade path</td><td style="color:#6ade88;font-size:12px">✅ OWNED — future Gaussian Avatar MR pipeline</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- NAS -->
+    <div class="hw-cat">
+      <button class="hw-cat-btn" style="background: linear-gradient(90deg,#221a0e 0%,#1a1208 100%);" onclick="hwToggle('nas')">
+        <div style="flex:1">
+          <div class="hw-cat-title">Synology DS423+ NAS</div>
+          <div class="hw-cat-desc">Photo library, Plex, model storage, Frigate archive — already running</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+          <span class="hw-badge hw-badge-done">✅ Running</span>
+          <span class="hw-badge hw-badge-need">~$345 needed</span>
+          <span class="hw-chevron" id="hw-chev-nas">▼</span>
+        </div>
+      </button>
+      <div id="hw-body-nas" style="display:none">
+        <div class="hw-table-wrap">
+          <table class="hw-table">
+            <thead><tr><th></th><th>Component</th><th>Spec</th><th>Price</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr class="done"><td>✅</td><td style="color:#6ade88;text-decoration:line-through">DS423+ NAS</td><td style="color:#c9d1d9">Intel Celeron J4125 · 4-bay · 2GB RAM</td><td style="color:#6ade88">✅ Done</td><td style="color:#6ade88;font-size:12px">✅ OWNED — Plex + Synology Photos running</td></tr>
+              <tr><td></td><td style="color:#f2ead8;font-weight:600">RAM Upgrade</td><td style="color:#c9d1d9">Synology DDR4 4GB SO-DIMM</td><td style="color:#c8922a;font-weight:700">~$35</td><td style="color:#8b949e;font-size:12px">⬜ NEEDED — for Docker + Immich + Plex</td></tr>
+              <tr><td></td><td style="color:#f2ead8;font-weight:600">NAS Drives</td><td style="color:#c9d1d9">2× Seagate IronWolf 6TB NAS HDD</td><td style="color:#c8922a;font-weight:700">~$260</td><td style="color:#8b949e;font-size:12px">⬜ NEEDED — RAID 1 redundant storage</td></tr>
+              <tr><td></td><td style="color:#f2ead8;font-weight:600">Cache SSD</td><td style="color:#c9d1d9">Samsung 870 EVO 500GB SATA</td><td style="color:#c8922a;font-weight:700">~$50</td><td style="color:#8b949e;font-size:12px">⬜ OPTIONAL — NAS read cache</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- CAMERAS -->
+    <div class="hw-cat">
+      <button class="hw-cat-btn" style="background: linear-gradient(90deg,#22100e 0%,#1a0a08 100%);" onclick="hwToggle('cam')">
+        <div style="flex:1">
+          <div class="hw-cat-title">Security Cameras — Reolink PoE</div>
+          <div class="hw-cat-desc">4K PoE · ONVIF · Frigate-compatible · no cloud required — all 6 cameras</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+          <span class="hw-badge hw-badge-need">~$475 needed</span>
+          <span class="hw-chevron" id="hw-chev-cam">▼</span>
+        </div>
+      </button>
+      <div id="hw-body-cam" style="display:none">
+        <div class="hw-table-wrap">
+          <table class="hw-table">
+            <thead><tr><th></th><th>Component</th><th>Spec</th><th>Price</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td></td><td style="color:#f2ead8;font-weight:600">RLC-810A × 2</td><td style="color:#c9d1d9">4K PoE bullet · IR night vision · ONVIF · IP66</td><td style="color:#c8922a;font-weight:700">~$110</td><td style="color:#8b949e;font-size:12px">Perimeter coverage; best value for Frigate AI detection</td></tr>
+              <tr><td></td><td style="color:#f2ead8;font-weight:600">RLC-823A × 1</td><td style="color:#c9d1d9">4K PoE · color night vision · spotlight · 2-way audio</td><td style="color:#c8922a;font-weight:700">~$75</td><td style="color:#8b949e;font-size:12px">Front door/driveway; color night vision for facial recognition</td></tr>
+              <tr><td></td><td style="color:#f2ead8;font-weight:600">Duo Floodlight PoE</td><td style="color:#c9d1d9">4K dual-lens 180° FOV · integrated floodlight</td><td style="color:#c8922a;font-weight:700">~$100</td><td style="color:#8b949e;font-size:12px">Pool area/garage; wide coverage + integrated lighting</td></tr>
+              <tr><td></td><td style="color:#f2ead8;font-weight:600">Doorbell PoE</td><td style="color:#c9d1d9">Reolink 2K PoE Video Doorbell · RTSP · ONVIF</td><td style="color:#c8922a;font-weight:700">~$70</td><td style="color:#8b949e;font-size:12px">PoE-powered; Frigate + HA native; 2-way audio</td></tr>
+              <tr><td></td><td style="color:#f2ead8;font-weight:600">Mirror Camera (Isabelle)</td><td style="color:#c9d1d9">Reolink E1 Zoom 5MP WiFi indoor</td><td style="color:#c8922a;font-weight:700">~$55</td><td style="color:#8b949e;font-size:12px">Closet/mirror for Isabelle fashion AI analysis</td></tr>
+              <tr><td></td><td style="color:#f2ead8;font-weight:600">Shelf Camera (Winston)</td><td style="color:#c9d1d9">Compact indoor camera</td><td style="color:#c8922a;font-weight:700">~$45</td><td style="color:#8b949e;font-size:12px">Bourbon shelf + humidor inventory scanning via Llama Vision</td></tr>
+              <tr><td></td><td style="color:#f2ead8;font-weight:600">Bar Mic (Winston)</td><td style="color:#c9d1d9">ESPHome voice satellite (ESP32 + MEMS mic)</td><td style="color:#c8922a;font-weight:700">~$20</td><td style="color:#8b949e;font-size:12px">Ambient mic for Winston bar conversation monitoring</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUDIO -->
+    <div class="hw-cat">
+      <button class="hw-cat-btn" style="background: linear-gradient(90deg,#1a1a2e 0%,#101020 100%);" onclick="hwToggle('audio')">
+        <div style="flex:1">
+          <div class="hw-cat-title">Multi-Zone Audio — Karaoke System</div>
+          <div class="hw-cat-desc">5 WiiM zones + Klipsch mains + Shure wireless mics + Scarlett 2i2</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+          <span class="hw-badge hw-badge-done">✅ ~$340 done</span>
+          <span class="hw-badge hw-badge-need">~$1,500+ needed</span>
+          <span class="hw-chevron" id="hw-chev-audio">▼</span>
+        </div>
+      </button>
+      <div id="hw-body-audio" style="display:none">
+        <div class="hw-table-wrap">
+          <table class="hw-table">
+            <thead><tr><th></th><th>Component</th><th>Spec</th><th>Price</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr class="done"><td>✅</td><td style="color:#6ade88;text-decoration:line-through">Focusrite Scarlett 2i2 4th Gen</td><td style="color:#c9d1d9">2-input USB-C · dual XLR preamps · 24-bit/192kHz · Air mode</td><td style="color:#6ade88">✅ Done</td><td style="color:#6ade88;font-size:12px">✅ PURCHASED — replaces Solo in karaoke chain</td></tr>
+              <tr class="done"><td>✅</td><td style="color:#6ade88;text-decoration:line-through">Focusrite Scarlett Solo (Backup)</td><td style="color:#c9d1d9">Retained as backup + Strings guitar input + Voice Capsule</td><td style="color:#6ade88">✅ Done</td><td style="color:#6ade88;font-size:12px">✅ OWNED — backup; kept on hand</td></tr>
+              <tr><td></td><td style="color:#f2ead8;font-weight:600">Shure BLX288/PG58 Wireless</td><td style="color:#c9d1d9">Dual wireless vocal · BLX88 receiver · 2× PG58 · H10 band</td><td style="color:#c8922a;font-weight:700">~$659</td><td style="color:#8b949e;font-size:12px">⬜ NEEDED — 300ft range; 14hr battery; dual XLR to 2i2</td></tr>
+              <tr><td></td><td style="color:#f2ead8;font-weight:600">WiiM Amp Ultra</td><td style="color:#c9d1d9">100W/ch ESS SABRE DAC · living room mains</td><td style="color:#c8922a;font-weight:700">~$299</td><td style="color:#8b949e;font-size:12px">⬜ NEEDED</td></tr>
+              <tr><td></td><td style="color:#f2ead8;font-weight:600">WiiM Amp × 3</td><td style="color:#c9d1d9">60W/ch AirPlay 2 · bedroom, basement, pool</td><td style="color:#c8922a;font-weight:700">~$399</td><td style="color:#8b949e;font-size:12px">⬜ NEEDED — 3 zones</td></tr>
+              <tr><td></td><td style="color:#f2ead8;font-weight:600">Klipsch RP-600M II</td><td style="color:#c9d1d9">6.5" bookshelf · living room mains</td><td style="color:#c8922a;font-weight:700">~$499</td><td style="color:#8b949e;font-size:12px">⬜ NEEDED</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="hw-summary">
+      <div class="hw-summary-label">Build Summary — August 2026</div>
+      <div class="hw-summary-grid">
+        <div class="hw-stat">
+          <div class="hw-stat-val" style="color:#6ade88">~$2,562</div>
+          <div class="hw-stat-lbl">Owned / Ordered</div>
+        </div>
+        <div class="hw-stat">
+          <div class="hw-stat-val" style="color:#c8922a">~$2,400+</div>
+          <div class="hw-stat-lbl">Still Needed</div>
+        </div>
+        <div class="hw-stat">
+          <div class="hw-stat-val" style="color:#c8c060">$739</div>
+          <div class="hw-stat-lbl">Saved (MINISFORUM out)</div>
+        </div>
+        <div class="hw-stat">
+          <div class="hw-stat-val" style="color:#2a8a3a">$0</div>
+          <div class="hw-stat-lbl">All Core Software</div>
+        </div>
+        <div class="hw-stat">
+          <div class="hw-stat-val" style="color:#f2ead8">16</div>
+          <div class="hw-stat-lbl">AI Personas</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- END HARDWARE BUILD CHART -->
+
 </section>
 
 <section class="section">
